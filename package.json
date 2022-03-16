@@ -1,6 +1,6 @@
 {
 	"name": "petme",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "petme-app",
 	"main": "src/index.tsx",
 	"scripts": {
