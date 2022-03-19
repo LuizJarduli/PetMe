@@ -4,6 +4,7 @@ import { createGlobalStyle } from 'styled-components';
  * Estilos Globais do App
  */
 export default createGlobalStyle`
+    
     /**
     * Cores do App
     */
