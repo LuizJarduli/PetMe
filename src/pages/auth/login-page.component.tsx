@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { CardComponent } from '../../components/containers/card/card.component';
+import { FormComponent } from '../../components/form/form.component';
 import { Column, Container } from './style';
 
 /**
@@ -17,12 +18,14 @@ export class LoginPageComponent extends Component {
             <Container>
                 <Column>
                     <img src='../../assets/logo/logo.png' alt=''></img>
-                    <span>PetMe</span>
+                    <span>Miclaa</span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec aliquam leo. Mauris eleifend, nibh at lacinia porttitor.</p>
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>
-                        <h1>Tela de Login será desenvolvida aqui</h1>
+                        <FormComponent>
+                            
+                        </FormComponent>
                     </CardComponent>
                 </Column>
             </Container>
