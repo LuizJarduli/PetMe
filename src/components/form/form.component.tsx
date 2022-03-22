@@ -1,6 +1,7 @@
 import { Component, Context, createContext, FormEvent, ReactNode } from 'react';
 import { IFormContext } from './form-properties.interface';
 import { validations } from './form-validations';
+import { IInputProperties } from './inputs/input-properties.interface';
 
 /**
  * Armazena e compartilha dados dos inputs para os demais componentes
@@ -28,16 +29,17 @@ export class FormComponent extends Component {
      * @param event emissão de dados do componente
      * @param param1 any
      */
-    public setFields = (event: FormEvent, { id, value }: { id: string | number; value: string | number}) => {
+    public setFields = (event: FormEvent, input: IInputProperties) => {
 		event && event.persist();
 	
 		const { submitData } = this.state;
-		const field = submitData[id];
-	
+		console.log(input);
+		const field = submitData[input.name as string];
+		console.log(field);
 		this.addField({
 			field: {
 				...field,
-				value: event ? (event.currentTarget as any).value : value
+				value: event ? (event.currentTarget as any).value : input.value
 			}
 		});
     };
@@ -46,27 +48,28 @@ export class FormComponent extends Component {
 	 * Adiciona dados dos inputs presentes no form ao estado do componente
 	 */
 	addField({ field }: any) {
-		const { id } = field;
-
+		const { name } = field;
+		
 		field = {
 			value: '',
 			...field
 		};
-
-		if (id) {
+		
+		// console.log(field);
+		if (name) {
 			this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => {
 				return {
 					...prevState,
 					submitData: {
 						...prevState.submitData,
-						[id]: field
+						[name]: field
 					}
 				};
 			});
 			return;
 		}
 
-		throw new Error(`please add 'id' field to the input: ${field}`);
+		throw new Error(`please add 'name' field to the input: ${field}`);
 	}
 
 	/**

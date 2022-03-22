@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
+import { Input } from '../../components/form/inputs/input.component';
 import { Column, Container } from './style';
 
 /**
@@ -24,7 +25,9 @@ export class LoginPageComponent extends Component {
                 <Column>
                     <CardComponent shadow size='sm'>
                         <FormComponent>
-                            
+                            <Input 
+                                name='teste'
+                                placeholder='teste'></Input>
                         </FormComponent>
                     </CardComponent>
                 </Column>

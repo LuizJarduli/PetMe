@@ -15,6 +15,7 @@ export default createGlobalStyle`
         --green: #FFFFFE;
         --grey: #F2F2F3;
         --white: #FFFFFF;
+        --red: #FF0000;
         --light-grey: #C2C2C2;
         --card-size-sm: 300px;
         --card-size-md: 430px;
