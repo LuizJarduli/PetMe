@@ -32,6 +32,8 @@ module.exports = {
         'react/jsx-uses-react': 'off',
         'react/react-in-jsx-scope': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-inferrable-types': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
         'quotes': [2, 'single', { 'avoidEscape': true }]
     },
 };
