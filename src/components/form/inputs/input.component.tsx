@@ -11,34 +11,31 @@ import { InputContainer, InputErrorMessage } from './input.styles';
 export class Input extends Component<IInputProperties> {
     constructor(props: IInputProperties) {
         super(props);
-        this.input = createRef<IInputProperties>();
+        this.input = createRef<HTMLInputElement>();
     }
 
     static contextType?: Context<any> | undefined = FormComponentContext;
 
     /** Referência do Input na página*/
-    private input: any;
+    protected input: RefObject<HTMLInputElement>;
 
     /** Objeto com as propriedades do Input */
-    private field: any;
+    protected field: any;
 
     /** Valor do input */
-    private value: string;
+    protected value: string;
 
     /** Mensagem de erro do input */
-    private fieldError: string;
+    protected fieldError: string;
 
     /**
      * Trata as emissões dos inputs
      * @param event 
      */
-    private validateInput(): void {
-        console.log(this.input.current);
+    protected validateInput(): void {
         if (this.input?.current?.value) {
-            console.log(this.input?.current?.value)
-            this.context.validateField(this.props.name);
+            this.context.validateFields(this.props.name);
         }
-        console.log('ei');
     }
 
     /**
@@ -55,8 +52,8 @@ export class Input extends Component<IInputProperties> {
                 placeholder={this.props.placeholder}
                 alt={this.props.alt}
                 readOnly={this.props.readonly}
-                onChange={event => { this.context.setFields(event, this.field)} }
-                onKeyPress={() => this.validateInput}/>
+                onChange={event => this.context.setFields(event, this.field)}
+                onKeyUp={() => this.validateInput()}/>
         )
     }
 
@@ -65,27 +62,35 @@ export class Input extends Component<IInputProperties> {
      * Chamado imediatamente após a montagem do componente.
      */
     componentDidMount(): void {
-        // Inicializa os atributos
-        this.field = this.context.submitData[this.props.name as string] || {};
-        console.log(this.context);
-        this.fieldError = this.context.errors[this.props.name as string] || '';
-        this.value = this.field?.value;
-
         this.context.addField({
             field: this.props,
             value: ''
-        });
+        })
+            .then(() => {
+                // Inicializa os atributos
+                this.field = this.context.submitData[this.props.name] || {};
+                this.fieldError = this.context.errors[this.props.name] || '';
+                this.value = this.field?.value;
+            })
+            .catch((error: string) => {
+                throw new Error(error);
+            });
     }
+
+    /**
+     * Chamado imediatamente após o componente ser destruído
+     */
+    componentWillUnmount(): void { }
 
     /**
      * Renderiza os elementos da página
      */
     render(): ReactNode {
-        return(
+        return (
             <InputContainer>
                 {this.getInput()}
-                <InputErrorMessage>{this.fieldError}</InputErrorMessage>
+                {this.fieldError ? (<InputErrorMessage>{this.fieldError}</InputErrorMessage>) : null }
             </InputContainer>
-        )
+        );
     }
 }

@@ -6,6 +6,11 @@ export const InputContainer = styled.div`
         box-sizing: border-box;
         border-radius: 10px;
         width: 100%;
+        height: 45px;
+        line-height: 2rem;
+        padding: 0 5px;
+        outline: 0;
+        margin-bottom: 10px;
     }
 
 `;

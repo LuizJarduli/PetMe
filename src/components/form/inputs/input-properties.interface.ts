@@ -1,5 +1,5 @@
 export interface IInputProperties {
-    name?: string;
+    name: string;
     placeholder?: string;
     min?: string;
     max?: string;
