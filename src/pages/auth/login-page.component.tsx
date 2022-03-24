@@ -1,7 +1,9 @@
 import { Component } from 'react';
+import { ButtonComponent } from '../../components/buttons/button.component';
 import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
-import { Input } from '../../components/form/inputs/input.component';
+import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
+import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
 import { Column, Container } from './style';
 
 /**
@@ -25,9 +27,18 @@ export class LoginPageComponent extends Component {
                 <Column>
                     <CardComponent shadow size='sm'>
                         <FormComponent>
-                            <Input 
-                                name='teste'
-                                placeholder='teste'></Input>
+                            <TextInputComponent 
+                                name='userName'
+                                placeholder='Usuário'
+                                required />
+                            <PasswordInputComponent 
+                                name='userPassword'
+                                placeholder='Senha'
+                                required />
+                            <ButtonComponent 
+                                name='confirmButton'
+                                label='Entrar'
+                                class='primary'/>
                         </FormComponent>
                     </CardComponent>
                 </Column>
