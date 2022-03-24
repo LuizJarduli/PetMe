@@ -1,7 +1,6 @@
 import { Component, Context, createContext, FormEvent, ReactNode } from 'react';
 import { IFormContext } from './form-properties.interface';
 import { validations } from './form-validations';
-import { IInputProperties } from './inputs/input-properties.interface';
 
 /**
  * Armazena e compartilha dados dos inputs para os demais componentes
@@ -19,6 +18,12 @@ export const FormComponentContext: Context<{ submitData: any; errors: any; }> = 
  */
 export class FormComponent extends Component {
 
+	constructor(props: any) {
+		super(props);
+		this.addField.bind(this);
+		this.setFields.bind(this);
+	}
+
     state: { submitData: { [key: string]: any }, errors: any} = {
         submitData: {},
         errors: {},
@@ -29,13 +34,11 @@ export class FormComponent extends Component {
      * @param event emissão de dados do componente
      * @param param1 any
      */
-    public setFields = (event: FormEvent, input: IInputProperties) => {
+    public setFields = (event: FormEvent, input: any) => {
 		event && event.persist();
 	
 		const { submitData } = this.state;
-		console.log(input);
 		const field = submitData[input.name as string];
-		console.log(field);
 		this.addField({
 			field: {
 				...field,
@@ -47,29 +50,30 @@ export class FormComponent extends Component {
 	/**
 	 * Adiciona dados dos inputs presentes no form ao estado do componente
 	 */
-	addField({ field }: any) {
+	public addField({ field }: any): Promise<void> {
 		const { name } = field;
 		
 		field = {
 			value: '',
 			...field
 		};
-		
-		// console.log(field);
-		if (name) {
-			this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => {
-				return {
-					...prevState,
-					submitData: {
-						...prevState.submitData,
-						[name]: field
-					}
-				};
-			});
-			return;
-		}
 
-		throw new Error(`please add 'name' field to the input: ${field}`);
+		return new Promise<void>((resolve, reject) => {
+			if (name) {
+				this.setState(() => {
+					return {
+						submitData: {
+							[name]: field
+						}
+					};
+				}, () => {
+					resolve();
+				});
+			} else {
+				reject(`please add 'name' field to the input: ${field}`);
+			}
+		})
+
 	}
 
 	/**
@@ -78,7 +82,7 @@ export class FormComponent extends Component {
 	 */
 	public validateFields = (id: string | number) => {
 		let error = '';
-		
+ 
 		const {
 			value: fieldValue,
 			validate,
@@ -131,6 +135,7 @@ export class FormComponent extends Component {
                 <FormComponentContext.Provider value={formContext}>
                     {this.props.children}
                 </FormComponentContext.Provider>
+				{}
             </form>
         );
     }
