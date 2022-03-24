@@ -25,6 +25,7 @@ export default createGlobalStyle`
         --padding-md: 24px;
         --padding-xl: 32px;
         --button-primary: #75AA62;
+        --button-secondary: #636363;
     }
 
     * {

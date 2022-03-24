@@ -1,8 +1,8 @@
 import { IButtonProperties } from './button-properties.interface';
 import styled from 'styled-components';
 
-export const StyledButton = styled.button`
-    background: ${ (props: IButtonProperties) => props.class ? `var(--button-${props.class})` : 'linear-gradient(180deg, #75AA62 0%, #75AA62 100%);'};
+export const StyledButton = styled.button<IButtonProperties>`
+    background: ${ (props: IButtonProperties) => props.color ? `var(--button-${props.color})` : 'linear-gradient(180deg, #75AA62 0%, #75AA62 100%);'};
     color: var(--white);
     box-sizing: border-box;
     border-radius: 10px;

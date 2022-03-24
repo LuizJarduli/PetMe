@@ -15,7 +15,7 @@ export class ButtonComponent extends Component<IButtonProperties> {
             <StyledButton
                 label={this.props.label}
                 name={this.props.name}
-                className={this.props.class}>
+                color={this.props.color}>
                     {this.props.label}
             </StyledButton>
         );
