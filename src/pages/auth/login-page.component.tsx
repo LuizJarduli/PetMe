@@ -4,7 +4,7 @@ import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
 import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
-import { Column, Container } from './style';
+import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './style';
 
 /**
  * Página de Login do sistema
@@ -38,8 +38,17 @@ export class LoginPageComponent extends Component {
                             <ButtonComponent 
                                 name='confirmButton'
                                 label='Entrar'
-                                class='primary'/>
+                                color='primary'/>
                         </FormComponent>
+                        <ForgetPasswordOption>
+                            <ForgetPasswordLabel>
+                                Esqueceu a senha?
+                            </ForgetPasswordLabel>
+                        </ForgetPasswordOption>
+                        <ButtonComponent 
+                                name='createAccountButton'
+                                label='Criar Conta'
+                                color='secondary'/>
                     </CardComponent>
                 </Column>
             </Container>

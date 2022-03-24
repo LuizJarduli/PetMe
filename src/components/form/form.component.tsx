@@ -135,7 +135,6 @@ export class FormComponent extends Component {
                 <FormComponentContext.Provider value={formContext}>
                     {this.props.children}
                 </FormComponentContext.Provider>
-				{}
             </form>
         );
     }
