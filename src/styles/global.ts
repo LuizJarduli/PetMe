@@ -9,12 +9,13 @@ export default createGlobalStyle`
     * Cores do App
     */
     :root {
-        --primary: ##FAFAFA;
+        --primary: #FAFAFA;
         --secondary: #FFFFFE;
         --black: #000000;
         --green: #FFFFFE;
         --grey: #F2F2F3;
         --white: #FFFFFF;
+        --red: #FF0000;
         --light-grey: #C2C2C2;
         --card-size-sm: 300px;
         --card-size-md: 430px;
@@ -23,6 +24,8 @@ export default createGlobalStyle`
         --padding-sm: 16px;
         --padding-md: 24px;
         --padding-xl: 32px;
+        --button-primary: #75AA62;
+        --button-secondary: #636363;
     }
 
     * {

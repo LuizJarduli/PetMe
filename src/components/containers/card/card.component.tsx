@@ -21,7 +21,7 @@ export class CardComponent extends Component<ICardProperties> {
             <Container
                 border={border || false}
                 shadow={shadow || false}
-                padding={padding || 'sm'}
+                padding={padding || 'md'}
                 size={size || 'sm'}
                 className='container-fluid'>
                     {this.props.children}

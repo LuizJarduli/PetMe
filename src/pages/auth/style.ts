@@ -65,3 +65,20 @@ export const Column = styled.div`
         }
     }
 `;
+
+export const ForgetPasswordOption = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+`;
+
+export const ForgetPasswordLabel = styled.p`
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 10px;
+    border-bottom: 1px solid #000;
+    width: 70%;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+`

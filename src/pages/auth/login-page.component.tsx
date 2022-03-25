@@ -1,6 +1,10 @@
 import { Component } from 'react';
+import { ButtonComponent } from '../../components/buttons/button.component';
 import { CardComponent } from '../../components/containers/card/card.component';
-import { Column, Container } from './style';
+import { FormComponent } from '../../components/form/form.component';
+import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
+import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
+import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './style';
 
 /**
  * Página de Login do sistema
@@ -17,12 +21,34 @@ export class LoginPageComponent extends Component {
             <Container>
                 <Column>
                     <img src='../../assets/logo/logo.png' alt=''></img>
-                    <span>PetMe</span>
+                    <span>Miclaa</span>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec aliquam leo. Mauris eleifend, nibh at lacinia porttitor.</p>
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>
-                        <h1>Tela de Login será desenvolvida aqui</h1>
+                        <FormComponent>
+                            <TextInputComponent 
+                                name='userName'
+                                placeholder='Usuário'
+                                required />
+                            <PasswordInputComponent 
+                                name='userPassword'
+                                placeholder='Senha'
+                                required />
+                            <ButtonComponent 
+                                name='confirmButton'
+                                label='Entrar'
+                                color='primary'/>
+                        </FormComponent>
+                        <ForgetPasswordOption>
+                            <ForgetPasswordLabel>
+                                Esqueceu a senha?
+                            </ForgetPasswordLabel>
+                        </ForgetPasswordOption>
+                        <ButtonComponent 
+                                name='createAccountButton'
+                                label='Criar Conta'
+                                color='secondary'/>
                     </CardComponent>
                 </Column>
             </Container>
