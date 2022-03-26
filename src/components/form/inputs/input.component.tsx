@@ -34,7 +34,9 @@ export class Input extends Component<IInputProperties> {
      */
     protected validateInput(): void {
         if (this.input?.current?.value) {
-            this.context.validateFields(this.props.name);
+            this.context.validateFields(this.props.name)
+                .then(() =>  this.fieldError = this.context.errors[this.props?.name] || '')
+                .finally(() => this.forceUpdate());
         }
     }
 
@@ -75,6 +77,13 @@ export class Input extends Component<IInputProperties> {
             .catch((error: string) => {
                 throw new Error(error);
             });
+    }
+
+    /**
+     * chamado Imediatamente após o DOM atualizar o componente, não é invocado no render inicial
+     */
+    componentDidUpdate(): void {
+        this.fieldError = this.context.errors[this.props?.name] || '';
     }
 
     /**

@@ -1,7 +1,7 @@
-import { Component } from 'react';
+import { Component, Context } from 'react';
 import { ButtonComponent } from '../../components/buttons/button.component';
 import { CardComponent } from '../../components/containers/card/card.component';
-import { FormComponent } from '../../components/form/form.component';
+import { FormComponent, FormComponentContext } from '../../components/form/form.component';
 import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
 import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './style';
@@ -12,6 +12,16 @@ import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './
  * @since 03/2022
  */
 export class LoginPageComponent extends Component {
+
+    constructor(props: typeof Component) {
+        super(props);
+    }
+
+    static contextType?: Context<any> | undefined = FormComponentContext;
+
+    private handleLoginFormSubmit(formData: any): void {
+        console.log(formData); // TODO: criar rotina de login
+    }
 
     /**
      * Renderiza os elementos da página
@@ -30,11 +40,11 @@ export class LoginPageComponent extends Component {
                             <TextInputComponent 
                                 name='userName'
                                 placeholder='Usuário'
-                                required />
+                                validate='required' />
                             <PasswordInputComponent 
                                 name='userPassword'
                                 placeholder='Senha'
-                                required />
+                                validate='required' />
                             <ButtonComponent 
                                 name='confirmButton'
                                 label='Entrar'
