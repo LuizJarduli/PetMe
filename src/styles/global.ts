@@ -47,6 +47,12 @@ export default createGlobalStyle`
         font-family: 'Noto Sans', Roboto, 'Helvetica Neue', Arial, sans-serif;
     }
 
+    text {
+        border: 0;
+        background: none;
+        font-family: 'Indie Flower', sans-serif;
+    }
+
     body {
         background-color: var(--primary);
     }
