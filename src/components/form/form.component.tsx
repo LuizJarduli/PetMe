@@ -36,8 +36,8 @@ export class FormComponent extends Component {
      */
     public setFields = (event: FormEvent, input: any) => {
 		event && event.persist();
-	
 		const { submitData } = this.state;
+		
 		const field = submitData[input.name as string];
 		this.addField({
 			field: {
@@ -60,9 +60,11 @@ export class FormComponent extends Component {
 
 		return new Promise<void>((resolve, reject) => {
 			if (name) {
-				this.setState(() => {
+				this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => {
 					return {
+						...prevState,
 						submitData: {
+							...prevState.submitData,
 							[name]: field
 						}
 					};
@@ -70,7 +72,7 @@ export class FormComponent extends Component {
 					resolve();
 				});
 			} else {
-				reject(`please add 'name' field to the input: ${field}`);
+				reject(`Coloque um name 'name' field to the input: ${field}`);
 			}
 		})
 
