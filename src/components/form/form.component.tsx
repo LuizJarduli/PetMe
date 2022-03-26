@@ -1,4 +1,4 @@
-import { Component, Context, createContext, FormEvent, ReactNode } from 'react';
+import { Component, Context, createContext, createRef, FormEvent, ReactNode, RefObject } from 'react';
 import { IFormContext } from './form-properties.interface';
 import { validations } from './form-validations';
 
@@ -22,7 +22,10 @@ export class FormComponent extends Component {
 		super(props);
 		this.addField.bind(this);
 		this.setFields.bind(this);
+		this.form = createRef<HTMLFormElement>();
 	}
+
+	private form: RefObject<HTMLFormElement>;
 
     state: { submitData: { [key: string]: any }, errors: any} = {
         submitData: {},
@@ -82,40 +85,61 @@ export class FormComponent extends Component {
 	 * Valida os campos do formulários
 	 * @param id id do campo no formulário
 	 */
-	public validateFields = (id: string | number) => {
+	public validateFields = (fieldName: string): Promise<void> => {
 		let error = '';
  
 		const {
 			value: fieldValue,
 			validate,
-			displayName,
+			name,
 			customRules = {}
-		} = this.state.submitData[id];
+		} = this.state.submitData[fieldName];
 		const rules = validate ? validate.split('|') : '';
 	
-		if (rules.length) {
-			for (const rule in rules) {
-				const ruleName = rules[rule];
-				const validation = validations[ruleName] || customRules[ruleName];
-				const isRuleSatisfied: boolean = ruleName !== 'required' && !fieldValue ? true : validation.rule().test(fieldValue.toString());
-
-				if (!isRuleSatisfied) {
-					error = validation.formatter.apply(null, [displayName || id]);
+		return new Promise<void>(resolve => {
+			if (rules.length) {
+				for (const rule in rules) {
+					const ruleName = rules[rule];
+					const validation = validations[ruleName] || customRules[ruleName];
+					const isRuleSatisfied: boolean = ruleName !== 'required' && !fieldValue ? true : validation.rule().test(fieldValue.toString());
+	
+					if (!isRuleSatisfied) {
+						error = validation.formatter.apply(null, [name || fieldName]);
+					}
+			
+					if (error !== '') {
+						break;
+					}
 				}
-		
-				if (error !== '') {
-					break;
-				}
+			
+				this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => ({
+					...prevState,
+					errors: {
+						...prevState.errors,
+						[fieldName]: error,
+					}
+				}), () => {
+					resolve();
+				});
+			} else {
+				resolve();
 			}
-		
-			this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => ({
-				...prevState,
-				errors: {
-					...prevState.errors,
-					[id]: error,
-				}
-			}));
-		}
+		})
+	}
+
+	/**
+	 * Faz a submissão dos dados do formulário, valida mais uma vez todos os valores atuais
+	 * dele (método `validateFields`) antes de bindar seu valor para o componente pai
+	 * @param event Evento de submit do formulário
+	 */
+	private submitForm(event: FormEvent<HTMLFormElement>): void {
+		event.preventDefault();
+		Object.keys(this.state.submitData)
+			?.forEach((key) => {
+				this.validateFields(key).then(() => {
+					this.forceUpdate();
+				});
+			});
 	}
 
     /**
@@ -133,7 +157,10 @@ export class FormComponent extends Component {
         };
 
         return(
-            <form action="">
+            <form 
+				action=""
+				ref={this.form}
+				onSubmit={(event) => this.submitForm(event)}>
                 <FormComponentContext.Provider value={formContext}>
                     {this.props.children}
                 </FormComponentContext.Provider>
