@@ -5,3 +5,7 @@ export interface IFormContext {
     addField(data: any): void;
     validateFields(field: any): void;
 }
+
+export interface IFormProperties {
+    onFormSubmit(event: any): void;
+}

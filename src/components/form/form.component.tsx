@@ -1,5 +1,5 @@
-import { Component, Context, createContext, createRef, FormEvent, ReactNode, RefObject } from 'react';
-import { IFormContext } from './form-properties.interface';
+import { Component, Context, createContext , FormEvent, ReactNode } from 'react';
+import { IFormContext, IFormProperties } from './form-properties.interface';
 import { validations } from './form-validations';
 
 /**
@@ -16,16 +16,14 @@ export const FormComponentContext: Context<{ submitData: any; errors: any; }> = 
  * @since 03/2022
  * @see https://javascript.plainenglish.io/a-better-way-to-handle-forms-and-input-with-react-e01500ac73c
  */
-export class FormComponent extends Component {
+export class FormComponent extends Component<IFormProperties> {
 
-	constructor(props: any) {
+	constructor(props: IFormProperties) {
 		super(props);
 		this.addField.bind(this);
 		this.setFields.bind(this);
-		this.form = createRef<HTMLFormElement>();
+		this.onFormSubmit.bind(this);
 	}
-
-	private form: RefObject<HTMLFormElement>;
 
     state: { submitData: { [key: string]: any }, errors: any} = {
         submitData: {},
@@ -132,14 +130,35 @@ export class FormComponent extends Component {
 	 * dele (método `validateFields`) antes de bindar seu valor para o componente pai
 	 * @param event Evento de submit do formulário
 	 */
-	private submitForm(event: FormEvent<HTMLFormElement>): void {
+	public submitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault();
-		Object.keys(this.state.submitData)
-			?.forEach((key) => {
-				this.validateFields(key).then(() => {
-					this.forceUpdate();
+		return new Promise<void>((resolve) => {
+			Object.keys(this.state.submitData)
+				?.forEach((key) => {
+					this.validateFields(key).then(() => {
+						this.forceUpdate();
+						resolve();
+					});
 				});
-			});
+		})
+	}
+
+	/**
+	 * Efetua o data-binding do formulário para o componente pai
+	 * @param data dados a serem bindados e despachados no evento
+	 */
+	private onFormSubmit(data: any): void {
+		if (!this.hasError()) {
+			const event: CustomEvent = new CustomEvent('onFormSubmit', { detail: data, bubbles: false, cancelable: true});
+			document.dispatchEvent(event);
+		}
+	}
+
+	/**
+	 * Verifica se o formulário ainda possui erros
+	 */
+	private hasError(): boolean {
+		return Object.values(this.state.errors).filter((error) => error !== '').length > 0;
 	}
 
     /**
@@ -159,8 +178,7 @@ export class FormComponent extends Component {
         return(
             <form 
 				action=""
-				ref={this.form}
-				onSubmit={(event) => this.submitForm(event)}>
+				onSubmit={(event) => this.submitForm(event).then(() => this.onFormSubmit(this.state.submitData))}>
                 <FormComponentContext.Provider value={formContext}>
                     {this.props.children}
                 </FormComponentContext.Provider>
