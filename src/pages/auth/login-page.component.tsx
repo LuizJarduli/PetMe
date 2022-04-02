@@ -12,6 +12,30 @@ import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './
  * @since 03/2022
  */
 export class LoginPageComponent extends Component {
+    constructor(props: typeof Component) {
+        super(props);
+    }
+
+    private handleLoginFormSubmit(formData: any): void {
+        console.log(formData); // TODO: criar rotina de login
+    }
+
+    /**
+     * Chamado imediatamente após a montagem do componente.
+     */
+    componentDidMount(): void {
+        document.addEventListener('onFormSubmit', (event) => {
+            event.stopPropagation();
+            this.handleLoginFormSubmit(event)
+        });
+    }
+
+    /**
+     * Chamado imediatamente após o componente ser destruído
+     */
+    componentWillUnmount(): void {
+        document.removeEventListener('onFormSubmit', (event) => this.handleLoginFormSubmit(event));
+    }
 
     /**
      * Renderiza os elementos da página
@@ -26,15 +50,16 @@ export class LoginPageComponent extends Component {
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>
-                        <FormComponent>
+                        <FormComponent
+                            onFormSubmit={(event) => this.handleLoginFormSubmit(event.detail)}>
                             <TextInputComponent 
                                 name='userName'
                                 placeholder='Usuário'
-                                required />
+                                validate='required' />
                             <PasswordInputComponent 
                                 name='userPassword'
                                 placeholder='Senha'
-                                required />
+                                validate='required' />
                             <ButtonComponent 
                                 name='confirmButton'
                                 label='Entrar'

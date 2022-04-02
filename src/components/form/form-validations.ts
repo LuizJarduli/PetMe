@@ -1,14 +1,20 @@
 export const validations: { [key: string]: any} = {
     required : {
         rule: () => /\S/,
-        formatter (campo: string) {
-            return `${campo} é Obrigatório.`;
+        formatter () {
+            return 'Campo é obrigatório.';
         }
     },
     numeric: {
         rule: () => /^\d+$/,
-        formatter (campo: string) {
-            return `${campo} deve conter apenas números.`;
+        formatter () {
+            return 'Campo deve conter apenas números.';
+        }
+    },
+    email: {
+        rule: () => /\S+@\S+\.\S+/,
+        formatter () {
+            return 'Insira um email válido.';
         }
     }
-  }
+}

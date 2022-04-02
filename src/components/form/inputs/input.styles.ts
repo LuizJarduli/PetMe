@@ -10,15 +10,16 @@ export const InputContainer = styled.div`
         line-height: 2rem;
         padding: 0 5px;
         outline: 0;
-        margin-bottom: 10px;
     }
+
+    margin-bottom: 10px;
 
 `;
 
 export const InputErrorMessage = styled.p`
     color: var(--red);
-    font-size: 9px;
+    font-size: 11px;
     text-align: left;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 10px;
+    margin-bottom: 2px;
 `;

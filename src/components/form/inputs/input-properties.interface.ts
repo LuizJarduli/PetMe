@@ -9,4 +9,6 @@ export interface IInputProperties {
     required?: boolean;
     value?: any;
     fieldError?: string;
+    validate?: string;
+    customRules?: { [key: string]: any };
 }
