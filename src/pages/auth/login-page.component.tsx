@@ -1,7 +1,7 @@
-import { Component, Context } from 'react';
+import { Component } from 'react';
 import { ButtonComponent } from '../../components/buttons/button.component';
 import { CardComponent } from '../../components/containers/card/card.component';
-import { FormComponent, FormComponentContext } from '../../components/form/form.component';
+import { FormComponent } from '../../components/form/form.component';
 import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
 import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './style';
@@ -12,17 +12,17 @@ import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './
  * @since 03/2022
  */
 export class LoginPageComponent extends Component {
-
     constructor(props: typeof Component) {
         super(props);
     }
-
-    static contextType?: Context<any> | undefined = FormComponentContext;
 
     private handleLoginFormSubmit(formData: any): void {
         console.log(formData); // TODO: criar rotina de login
     }
 
+    /**
+     * Chamado imediatamente após a montagem do componente.
+     */
     componentDidMount(): void {
         document.addEventListener('onFormSubmit', (event) => {
             event.stopPropagation();
@@ -30,6 +30,9 @@ export class LoginPageComponent extends Component {
         });
     }
 
+    /**
+     * Chamado imediatamente após o componente ser destruído
+     */
     componentWillUnmount(): void {
         document.removeEventListener('onFormSubmit', (event) => this.handleLoginFormSubmit(event));
     }
