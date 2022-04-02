@@ -23,6 +23,17 @@ export class LoginPageComponent extends Component {
         console.log(formData); // TODO: criar rotina de login
     }
 
+    componentDidMount(): void {
+        document.addEventListener('onFormSubmit', (event) => {
+            event.stopPropagation();
+            this.handleLoginFormSubmit(event)
+        });
+    }
+
+    componentWillUnmount(): void {
+        document.removeEventListener('onFormSubmit', (event) => this.handleLoginFormSubmit(event));
+    }
+
     /**
      * Renderiza os elementos da página
      */
@@ -36,7 +47,8 @@ export class LoginPageComponent extends Component {
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>
-                        <FormComponent>
+                        <FormComponent
+                            onFormSubmit={(event) => this.handleLoginFormSubmit(event.detail)}>
                             <TextInputComponent 
                                 name='userName'
                                 placeholder='Usuário'

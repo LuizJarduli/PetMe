@@ -2,8 +2,8 @@ import { Component, ReactNode } from 'react';
 import { IButtonProperties } from './button-properties.interface';
 import { StyledButton } from './style';
 
-export class ButtonComponent extends Component<IButtonProperties> {
-    constructor(props: IButtonProperties) {
+export class ButtonComponent extends Component<IButtonProperties, HTMLButtonElement> {
+    constructor(props: IButtonProperties & HTMLButtonElement) {
         super(props);
     }
 
