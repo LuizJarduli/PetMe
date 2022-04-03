@@ -1,6 +1,11 @@
 import { Component, ReactNode } from 'react';
 import { Container, Text } from './style';
 
+/**
+ * Pagina Cadastro Usuario
+ * @author Gustavo Cecato
+ * @since 
+ */
 export class NoPageComponent extends Component {
     render(): ReactNode {
         return(
