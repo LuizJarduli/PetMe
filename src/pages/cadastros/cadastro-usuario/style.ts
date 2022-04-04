@@ -9,53 +9,39 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    @media (max-width: 540px) {
-        flex-direction: column;
-    }
-`;
-
-export const Column = styled.div`
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-
     > text {
         font-family: 'Indie Flower', sans-serif;
         font-style: normal;
         font-weight: 600;
-        font-size: 110px;
-        line-height: 136px;
+        font-size: 80px;
+        line-height: 50px;
+        color: #000000;
+    }
+
+    > h1 {
+        font-family: 'Indie Flower', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 80px;
+        line-height: 50px;
         color: #000000;
     }
     
-    > p {
-        font-family: 'Noto Sans', sans-serif;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 24px;
-        line-height: 33px;
-        text-align: justify;
-    }
-    
     > img {
-        width: 200px;
-        height: 188px;
-
+        width: 160px;
+        height: 148px;
+        margin-bottom: 1em;
     }
 
     @media (max-width: 540px) {
-        width: 100%;
-        margin-top: 2rem;
 
         > img {
-            width: calc(200px / 2);
-            height: calc(188px / 2);
+            width: calc(160px / 1.2);
+            height: calc(148px / 1.2);
         }
 
-        > p {
-            display: none;
+        > text {
+            font-size: calc(80px;/ 1.2);
         }
 
         > span {
@@ -63,4 +49,5 @@ export const Column = styled.div`
             line-height: 60px;
         }
     }
+
 `;
