@@ -4,6 +4,7 @@ import { FormComponent } from '../../../components/form/form.component';
 import { ButtonComponent } from '../../../components/buttons/button.component';
 import { PasswordInputComponent } from '../../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../../components/form/inputs/text-input/text-input.component';
+import { EmailInputComponent } from '../../../components/form/inputs/email-input/email-input.component';
 import { Container } from './style';
 
 /**
@@ -53,7 +54,7 @@ export class CadastroUsuarioComponent extends Component {
                             placeholder='Usuário'
                             validate='riqured'
                         />
-                        <TextInputComponent
+                        <EmailInputComponent
                             name='usarEmail'
                             placeholder='Email'
                             validate='riqured'
