@@ -51,7 +51,7 @@ export class RecuperarSenhaComponent extends Component{
                         <EmailInputComponent
                             name='usarEmail'
                             placeholder='Email'
-                            validate='riqured'
+                            validate='required'
                         />
 
                         <ButtonComponent 
