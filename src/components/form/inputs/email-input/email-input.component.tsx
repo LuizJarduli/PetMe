@@ -18,7 +18,7 @@ export class EmailInputComponent extends Input{
         return(
             <input
                 type="email"
-                ref={this.props.name}
+                ref={this.input}
                 name={this.props.name}
                 id={'input-' + this.props.name}
                 placeholder={this.props.placeholder}
