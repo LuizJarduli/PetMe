@@ -17,7 +17,7 @@ export class Input extends Component<IInputProperties> {
     static contextType?: Context<any> | undefined = FormComponentContext;
 
     /** Referência do Input na página*/
-    protected input: RefObject<HTMLInputElement>;
+    protected input: RefObject<HTMLInputElement | any>;
 
     /** Objeto com as propriedades do Input */
     protected field: any;
@@ -34,11 +34,17 @@ export class Input extends Component<IInputProperties> {
      */
     protected validateInput(): void {
         if (this.input?.current?.value) {
+            this.customValidate();
             this.context.validateFields(this.props.name)
                 .then(() =>  this.fieldError = this.context.errors[this.props?.name] || '')
                 .finally(() => this.forceUpdate());
         }
     }
+
+    /**
+     * Efetua validações customizadas para os inputs
+     */
+    protected customValidate(): void { }
 
     /**
      * Recupera o input, possibilitando sobrescrevê-lo pelas classes herdeiras (extend)

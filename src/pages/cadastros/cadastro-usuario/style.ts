@@ -9,7 +9,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    > text {
+    > p {
         font-family: 'Indie Flower', sans-serif;
         font-style: normal;
         font-weight: 600;
