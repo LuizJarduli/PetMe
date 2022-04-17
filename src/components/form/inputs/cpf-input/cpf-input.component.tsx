@@ -13,11 +13,11 @@ export class CPFInputComponent extends Input {
      * Efetua validações customizadas para os inputs
      */
     protected customValidate(): void {
-        const inputValue: string = this.input.current?.value;
-        if (!this.validateCPF(inputValue)) {
-            console.log('teste');
-            console.log(this.input.current?.value);
-            this.fieldError = 'CPF inválido';
+        const inputValue: string = this.input.current?.value?.replace(/[^\d]+/g, '');
+        if (!this.validateCPF(inputValue) && inputValue.length > 10) {
+            this.setFormState({ errors: { [this.props?.name]: 'CPF inválido'}})
+                .then(() => this.fieldError = this.context.errors[this.props?.name] || '')
+                .finally(() => this.forceUpdate());
         }
     }
 
@@ -27,7 +27,6 @@ export class CPFInputComponent extends Input {
      * @see https://www.geradorcpf.com/javascript-validar-cpf.htm
      */
     private validateCPF(cpf: string): boolean {
-            cpf = cpf.replace(/[^\d]+/g,'');	
             if(cpf == '') return false;	
             // Elimina CPFs invalidos conhecidos	
             if (cpf.length != 11 || 
