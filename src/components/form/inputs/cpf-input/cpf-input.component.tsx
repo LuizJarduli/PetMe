@@ -3,6 +3,11 @@ import { IInputProperties } from '../input-properties.interface';
 import { Input } from '../input.component';
 import InputMask, { ReactInputMask } from 'react-input-mask';
 
+/**
+ * Input de CPF do App
+ * @author Luiz Miguel
+ * @since 04/2022
+ */
 export class CPFInputComponent extends Input {
     constructor(props: IInputProperties) {
         super(props);
