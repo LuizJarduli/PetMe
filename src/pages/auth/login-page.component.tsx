@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Navigate } from 'react-router-dom';
 import { ButtonComponent } from '../../components/buttons/button.component';
 import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
@@ -16,8 +17,18 @@ export class LoginPageComponent extends Component {
         super(props);
     }
 
+    state: { user: null, error: null, redirect: null};
+
     private handleLoginFormSubmit(formData: any): void {
         console.log(formData); // TODO: criar rotina de login
+    }
+
+    /**
+     * Trata os redirecionamentos da página com a rota informada
+     * @param route rota a ser redirecionada
+     */
+    private handleNavigate(route: string): void {
+        this.setState({ redirect: route});
     }
 
     /**
@@ -73,7 +84,9 @@ export class LoginPageComponent extends Component {
                         <ButtonComponent 
                                 name='createAccountButton'
                                 label='Criar Conta'
-                                color='secondary'/>
+                                color='secondary'
+                                onClick={() => this.handleNavigate('/cadastro')}/>
+                        { this.state?.redirect && <Navigate to={this.state.redirect} />}
                     </CardComponent>
                 </Column>
             </Container>

@@ -23,6 +23,8 @@ export class FormComponent extends Component<IFormProperties> {
 		this.addField.bind(this);
 		this.setFields.bind(this);
 		this.onFormSubmit.bind(this);
+		this.setState.bind(this);
+		this.setFormStateValue.bind(this);
 	}
 
     state: { submitData: { [key: string]: any }, errors: any} = {
@@ -73,7 +75,7 @@ export class FormComponent extends Component<IFormProperties> {
 					resolve();
 				});
 			} else {
-				reject(`Coloque um name 'name' field to the input: ${field}`);
+				reject(`Coloque o atributo 'name' no input: ${field}`);
 			}
 		})
 
@@ -144,6 +146,26 @@ export class FormComponent extends Component<IFormProperties> {
 	}
 
 	/**
+     * Seta novos valores para as variáveis de estado do formulário, por meio do Context
+     * @param state novos valores informados para atualizar o estado do form
+     */
+	public setFormStateValue = (state: { submitData?: { [key: string]: any}; errors?: any;}): Promise<void> => {
+		return new Promise<void>(resolve => {
+			this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => ({
+                ...prevState,
+                errors: {
+                    ...prevState.errors,
+                   ...state?.errors,
+                },
+                submitData: {
+                    ...prevState.submitData,
+                    ...state?.submitData,
+                },
+            }), () => resolve());
+		})
+	}
+
+	/**
 	 * Efetua o data-binding do formulário para o componente pai
 	 * @param data dados a serem bindados e despachados no evento
 	 */
@@ -173,6 +195,7 @@ export class FormComponent extends Component<IFormProperties> {
 			addField: (data: any) => this.addField(data),
             setFields: this.setFields,
 			validateFields: this.validateFields,
+			setFormStateValue: this.setFormStateValue,
         };
 
         return(

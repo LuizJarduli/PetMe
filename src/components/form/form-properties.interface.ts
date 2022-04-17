@@ -4,6 +4,7 @@ export interface IFormContext {
 	setFields(event: any, { id, value}: { id: any; value: any;}): void;
     addField(data: any): void;
     validateFields(field: any): void;
+    setFormStateValue(prevState: { submitData: { [key: string]: any }; errors: any; }): void;
 }
 
 export interface IFormProperties {

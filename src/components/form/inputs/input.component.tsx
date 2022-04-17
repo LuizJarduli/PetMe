@@ -17,7 +17,7 @@ export class Input extends Component<IInputProperties> {
     static contextType?: Context<any> | undefined = FormComponentContext;
 
     /** Referência do Input na página*/
-    protected input: RefObject<HTMLInputElement>;
+    protected input: RefObject<HTMLInputElement | any>;
 
     /** Objeto com as propriedades do Input */
     protected field: any;
@@ -36,8 +36,31 @@ export class Input extends Component<IInputProperties> {
         if (this.input?.current?.value) {
             this.context.validateFields(this.props.name)
                 .then(() =>  this.fieldError = this.context.errors[this.props?.name] || '')
-                .finally(() => this.forceUpdate());
+                .finally(() => {
+                    this.customValidate();
+                    this.forceUpdate();
+                });
         }
+    }
+
+    /**
+     * Efetua validações customizadas para os inputs
+     */
+    protected customValidate(): void { }
+
+    /**
+     * Seta novos valores para as variáveis de estado do formulário, por meio do Context
+     * @param state novos valores informados para atualizar o estado do form
+     */
+    protected setFormState = (state: { submitData?: { [key: string]: any}; errors?: any;}): Promise<void> => {
+        return new Promise<void>(resolve => {
+            this.context.setFormStateValue(state)
+                .then(() => {
+                    this.fieldError = this.context.errors[this.props?.name] || ''
+                    this.forceUpdate();
+                    resolve();
+                });
+        });
     }
 
     /**
