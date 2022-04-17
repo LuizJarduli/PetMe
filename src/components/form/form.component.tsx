@@ -155,7 +155,7 @@ export class FormComponent extends Component<IFormProperties> {
                 ...prevState,
                 errors: {
                     ...prevState.errors,
-                    usarCPF: 'CPF Inválido',
+                   ...state?.errors,
                 },
                 submitData: {
                     ...prevState.submitData,
