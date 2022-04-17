@@ -34,10 +34,12 @@ export class Input extends Component<IInputProperties> {
      */
     protected validateInput(): void {
         if (this.input?.current?.value) {
-            this.customValidate();
             this.context.validateFields(this.props.name)
                 .then(() =>  this.fieldError = this.context.errors[this.props?.name] || '')
-                .finally(() => this.forceUpdate());
+                .finally(() => {
+                    this.customValidate();
+                    this.forceUpdate();
+                });
         }
     }
 
@@ -45,6 +47,20 @@ export class Input extends Component<IInputProperties> {
      * Efetua validações customizadas para os inputs
      */
     protected customValidate(): void { }
+
+    /**
+     * Seta novos valores para as variáveis de estado do formulário, por meio do Context
+     * @param state novos valores informados para atualizar o estado do form
+     */
+    protected setFormState = (state: { submitData?: { [key: string]: any}; errors?: any;}): Promise<void> => {
+        return new Promise<void>(resolve => {
+            this.context.setFormStateValue(state)
+                .then(() => {
+                    this.forceUpdate();
+                    resolve();
+                });
+        });
+    }
 
     /**
      * Recupera o input, possibilitando sobrescrevê-lo pelas classes herdeiras (extend)

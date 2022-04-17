@@ -23,6 +23,8 @@ export class FormComponent extends Component<IFormProperties> {
 		this.addField.bind(this);
 		this.setFields.bind(this);
 		this.onFormSubmit.bind(this);
+		this.setState.bind(this);
+		this.setFormStateValue.bind(this);
 	}
 
     state: { submitData: { [key: string]: any }, errors: any} = {
@@ -73,7 +75,7 @@ export class FormComponent extends Component<IFormProperties> {
 					resolve();
 				});
 			} else {
-				reject(`Coloque um name 'name' field to the input: ${field}`);
+				reject(`Coloque o atributo 'name' no input: ${field}`);
 			}
 		})
 
@@ -132,6 +134,7 @@ export class FormComponent extends Component<IFormProperties> {
 	 */
 	public submitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault();
+		console.log('state on submit -> ', this.state);
 		return new Promise<void>((resolve) => {
 			Object.keys(this.state.submitData)
 				?.forEach((key) => {
@@ -140,6 +143,27 @@ export class FormComponent extends Component<IFormProperties> {
 						resolve();
 					});
 				});
+		})
+	}
+
+	/**
+     * Seta novos valores para as variáveis de estado do formulário, por meio do Context
+     * @param state novos valores informados para atualizar o estado do form
+     */
+	public setFormStateValue = (state: { submitData?: { [key: string]: any}; errors?: any;}): Promise<void> => {
+		return new Promise<void>(resolve => {
+			console.log(state);
+			this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => ({
+                ...prevState,
+                errors: {
+                    ...prevState.errors,
+                    usarCPF: 'CPF Inválido',
+                },
+                submitData: {
+                    ...prevState.submitData,
+                    ...state?.submitData,
+                },
+            }), () => resolve());
 		})
 	}
 
@@ -173,6 +197,7 @@ export class FormComponent extends Component<IFormProperties> {
 			addField: (data: any) => this.addField(data),
             setFields: this.setFields,
 			validateFields: this.validateFields,
+			setFormStateValue: this.setFormStateValue,
         };
 
         return(
