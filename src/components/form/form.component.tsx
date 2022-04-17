@@ -134,7 +134,6 @@ export class FormComponent extends Component<IFormProperties> {
 	 */
 	public submitForm(event: FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault();
-		console.log('state on submit -> ', this.state);
 		return new Promise<void>((resolve) => {
 			Object.keys(this.state.submitData)
 				?.forEach((key) => {
@@ -152,7 +151,6 @@ export class FormComponent extends Component<IFormProperties> {
      */
 	public setFormStateValue = (state: { submitData?: { [key: string]: any}; errors?: any;}): Promise<void> => {
 		return new Promise<void>(resolve => {
-			console.log(state);
 			this.setState((prevState: { submitData: { [key: string]: any }; errors: any; }) => ({
                 ...prevState,
                 errors: {
