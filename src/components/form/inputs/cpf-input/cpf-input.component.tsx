@@ -20,9 +20,7 @@ export class CPFInputComponent extends Input {
     protected customValidate(): void {
         const inputValue: string = this.input.current?.value?.replace(/[^\d]+/g, '');
         if (!this.validateCPF(inputValue) && inputValue.length > 10) {
-            this.setFormState({ errors: { [this.props?.name]: 'CPF inválido'}})
-                .then(() => this.fieldError = this.context.errors[this.props?.name] || '')
-                .finally(() => this.forceUpdate());
+            this.setFormState({ errors: { [this.props?.name]: 'CPF inválido'}});
         }
     }
 

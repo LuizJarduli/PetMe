@@ -56,6 +56,7 @@ export class Input extends Component<IInputProperties> {
         return new Promise<void>(resolve => {
             this.context.setFormStateValue(state)
                 .then(() => {
+                    this.fieldError = this.context.errors[this.props?.name] || ''
                     this.forceUpdate();
                     resolve();
                 });
