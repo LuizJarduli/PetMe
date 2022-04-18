@@ -4,7 +4,9 @@ import { FormComponent } from '../../../components/form/form.component';
 import { ButtonComponent } from '../../../components/buttons/button.component';
 import { PasswordInputComponent } from '../../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../../components/form/inputs/text-input/text-input.component';
+import { EmailInputComponent } from '../../../components/form/inputs/email-input/email-input.component';
 import { Container } from './style';
+import { CPFInputComponent } from '../../../components/form/inputs/cpf-input/cpf-input.component';
 
 /**
  * Pagina Cadastro Usuario
@@ -43,25 +45,25 @@ export class CadastroUsuarioComponent extends Component {
             <Container>
 
                 <img src="../../assets/logo/logo.png" alt="Logo"></img>
-                <text>Miclaa</text>
+                <p>Miclaa</p>
 
                 <CardComponent shadow size='sm'>
                     <h1>Cadastre-se</h1>
                     <FormComponent onFormSubmit={(event) => this.handleCadastroFormSubmit(event.detail)}>
                         <TextInputComponent
-                            name='usarName'
+                            name='userName'
                             placeholder='Usuário'
-                            validate='riqured'
+                            validate='required'
                         />
-                        <TextInputComponent
-                            name='usarEmail'
+                        <EmailInputComponent
+                            name='userEmail'
                             placeholder='Email'
-                            validate='riqured'
+                            validate='required'
                         />
-                        <TextInputComponent
+                        <CPFInputComponent
                             name='usarCPF'
                             placeholder='CPF'
-                            validate='riqured'
+                            validate='required'
                         />
                         <PasswordInputComponent 
                                 name='userPassword'
