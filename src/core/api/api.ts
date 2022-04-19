@@ -7,7 +7,8 @@ import { ApiMethod, KeyValue } from './api-properties.interface';
  * @see https://rossbulat.medium.com/advanced-typescript-by-example-api-service-manager-7ea591f5eba8
  */
 export class ApiService {
-    constructor (private _authToken: string) { }
+    constructor (private _authToken: string = '') { }
+
     private _method: ApiMethod = 'POST';
     private _headers: string[][] = [];
     public static endpoint: string;
@@ -22,6 +23,13 @@ export class ApiService {
 
     get headers(): string[][] {
         return this._headers;
+    }
+
+    /**
+     * Retorna uma nova instância da classe
+     */
+    public static getInstance(): ApiService {
+        return new ApiService();
     }
 
     /**
