@@ -7,7 +7,18 @@ import { ApiMethod, KeyValue } from './api-properties.interface';
  * @see https://rossbulat.medium.com/advanced-typescript-by-example-api-service-manager-7ea591f5eba8
  */
 export class ApiService {
-    constructor (private _authToken: string = '') { }
+    constructor (private _authToken: string = '') { 
+        this.setHeaders([
+            {
+                key: 'Accept',
+                value: 'application/json',
+            },
+            {
+                key: 'Content-Type',
+                value: 'application/json',
+            }
+        ])
+    }
 
     private _method: ApiMethod = 'POST';
     private _headers: string[][] = [];

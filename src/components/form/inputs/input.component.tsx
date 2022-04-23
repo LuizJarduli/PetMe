@@ -82,7 +82,6 @@ export class Input extends Component<IInputProperties> {
         )
     }
 
-
     /**
      * Chamado imediatamente após a montagem do componente.
      */
@@ -103,7 +102,7 @@ export class Input extends Component<IInputProperties> {
     }
 
     /**
-     * chamado Imediatamente após o DOM atualizar o componente, não é invocado no render inicial
+     * Chamado Imediatamente após o DOM atualizar o componente, não é invocado no render inicial
      */
     componentDidUpdate(): void {
         this.fieldError = this.context.errors[this.props?.name] || '';

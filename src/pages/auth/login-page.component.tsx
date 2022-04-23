@@ -27,7 +27,6 @@ export class LoginPageComponent extends Component {
      * @param formData dados de Login
      */
     private handleLoginFormSubmit(formData: any): void {
-        console.log('dados de submit', formData); // TODO: criar rotina de login
         AuthApi.login({ username: formData.userName.value, password: formData.userPassword.value})
             .then((response: ILoginResponse) => console.log('sucesso', response))
             .catch((error) => console.log('erro', error));
