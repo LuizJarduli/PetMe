@@ -7,6 +7,8 @@ import { TextInputComponent } from '../../../components/form/inputs/text-input/t
 import { EmailInputComponent } from '../../../components/form/inputs/email-input/email-input.component';
 import { Container } from './style';
 import { CPFInputComponent } from '../../../components/form/inputs/cpf-input/cpf-input.component';
+import { userApi } from '../../../core/api/cadastro/cadastro.api';
+import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
 
 /**
  * Pagina Cadastro Usuario
@@ -20,7 +22,14 @@ export class CadastroUsuarioComponent extends Component {
     }
 
     private handleCadastroFormSubmit(formData: any): void {
-        console.log(formData); // TODO: criar rotina de login
+        userApi.create({
+            username: formData.userName.value,
+            senha: formData.userPassword.value,
+            cpf: formData.usarCPF.value,
+            email: formData.userEmail.value,
+        })
+        .then((response: IUserPropertiesModel) => console.log('sucesso', response))
+        .catch((error) => console.log('erro', error));
     }
 
     /**
@@ -29,7 +38,7 @@ export class CadastroUsuarioComponent extends Component {
     componentDidMount(): void {
         document.addEventListener('onFormSubmit', (event) => {
             event.stopPropagation();
-            this.handleCadastroFormSubmit(event)
+            this.handleCadastroFormSubmit((event as CustomEvent).detail)
         });
     }
 
@@ -37,7 +46,7 @@ export class CadastroUsuarioComponent extends Component {
      * Chamado imediatamente após o componente ser destruído
      */
     componentWillUnmount(): void {
-        document.removeEventListener('onFormSubmit', (event) => this.handleCadastroFormSubmit(event));
+        document.removeEventListener('onFormSubmit', (event) => this.handleCadastroFormSubmit((event as CustomEvent).detail));
     }
 
     render(): JSX.Element {
@@ -74,7 +83,7 @@ export class CadastroUsuarioComponent extends Component {
                         <br/><br/>
 
                         <ButtonComponent 
-                                name='confirmButton'
+                                name='confirmCadButton'
                                 label='Cadastrar'
                                 color='primary'/>
 
