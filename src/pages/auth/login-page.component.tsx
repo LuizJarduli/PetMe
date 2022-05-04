@@ -5,6 +5,7 @@ import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
 import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
+import { LoadingComponent } from '../../components/utility-components/loading.component';
 import { AuthApi } from '../../core/api/auth/auth.api';
 import { ILoginProperties, ILoginResponse } from '../../core/api/auth/auth.api.properties';
 import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './style';
@@ -19,7 +20,7 @@ export class LoginPageComponent extends Component {
         super(props);
     }
 
-    state: { user: null, error: null, redirect: null};
+    state: { user: null, error: null, redirect: null, loading: false};
 
     /**
      * Realiza o Login do usuário ao dar submit no form
@@ -27,9 +28,11 @@ export class LoginPageComponent extends Component {
      * @param formData dados de Login
      */
     private handleLoginFormSubmit(formData: any): void {
+        this.setState({ loading: true });
         AuthApi.login({ username: formData.userName.value, password: formData.userPassword.value})
             .then((response: ILoginResponse) => console.log('sucesso', response))
-            .catch((error) => console.log('erro', error));
+            .catch((error) => console.log('erro', error))
+            .finally(() => this.setState({ loading: false}))
     }
 
     /**
@@ -63,6 +66,7 @@ export class LoginPageComponent extends Component {
     render(): JSX.Element {
         return(
             <Container>
+                { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
                 <Column>
                     <img src='../../assets/logo/logo.png' alt=''></img>
                     <span>Miclaa</span>
