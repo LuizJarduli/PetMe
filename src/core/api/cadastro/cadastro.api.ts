@@ -14,7 +14,7 @@ export class userApi {
      */
     public static create(params: Partial<IUserPropertiesModel>): Promise<IUserPropertiesModel> {
         return new Promise<IUserPropertiesModel>((resolve, reject) => {
-            ApiService.getInstance().setMethod('POST').call('http://26.176.192.89:8080/usuarios', params)
+            ApiService.getInstance().setMethod('POST').call('http://localhost:8080/usuarios', params)
                 .then((response: IUserPropertiesModel) => resolve(response))
                 .catch((error: any) => reject(error));
         });

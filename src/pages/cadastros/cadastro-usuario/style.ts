@@ -5,33 +5,9 @@ export const Container = styled.div`
     width: 100vw;
     height: 100vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    > p {
-        font-family: 'Indie Flower', sans-serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 80px;
-        line-height: 50px;
-        color: #000000;
-    }
-
-    > h1 {
-        font-family: 'Indie Flower', sans-serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 80px;
-        line-height: 50px;
-        color: #000000;
-    }
-    
-    > img {
-        width: 160px;
-        height: 148px;
-        margin-bottom: 1em;
-    }
 
     @media (max-width: 540px) {
 
@@ -48,6 +24,49 @@ export const Container = styled.div`
             font-size: 60px;
             line-height: 60px;
         }
+
+        flex-direction: column;
+    }
+`;
+
+export const Column = styled.div`
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+
+    > p {
+        font-family: 'Signika Negative', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 110px;
+        line-height: 136px;
+        color: #000000;
+    }
+    
+    > img {
+        width: 296px;
+        height: 277px;
     }
 
+    @media (max-width: 540px) {
+        width: 100%;
+        margin-top: 2rem;
+
+        > img {
+            width: calc(296px / 2);
+            height: calc(277px / 2);
+        }
+
+        > p {
+            display: none;
+        }
+
+        > span {
+            font-size: 60px;
+            line-height: 60px;
+        }
+    }
 `;

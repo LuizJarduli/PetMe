@@ -5,7 +5,7 @@ import { ButtonComponent } from '../../../components/buttons/button.component';
 import { PasswordInputComponent } from '../../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../../components/form/inputs/text-input/text-input.component';
 import { EmailInputComponent } from '../../../components/form/inputs/email-input/email-input.component';
-import { Container } from './style';
+import { Column, Container } from './style';
 import { CPFInputComponent } from '../../../components/form/inputs/cpf-input/cpf-input.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
 import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
@@ -52,44 +52,46 @@ export class CadastroUsuarioComponent extends Component {
     render(): JSX.Element {
         return(
             <Container>
+                <Column>
+                    <img src="../../assets/logo/logo.png" alt="Logo"></img>
+                    <p>Miclaa</p>
+                </Column>
+                <Column>
+                    <CardComponent shadow size='sm'>
+                        <h1>Cadastre-se</h1>
+                        <FormComponent onFormSubmit={(event) => this.handleCadastroFormSubmit(event.detail)}>
+                            <TextInputComponent
+                                name='userName'
+                                placeholder='Usuário'
+                                validate='required'
+                            />
+                            <EmailInputComponent
+                                name='userEmail'
+                                placeholder='Email'
+                                validate='required'
+                            />
+                            <CPFInputComponent
+                                name='usarCPF'
+                                placeholder='CPF'
+                                validate='required'
+                            />
+                            <PasswordInputComponent 
+                                    name='userPassword'
+                                    placeholder='Senha'
+                                    validate='required' />
 
-                <img src="../../assets/logo/logo.png" alt="Logo"></img>
-                <p>Miclaa</p>
+                            <input type="checkbox" />Li e concordo com os Termos.*
+                            <br/><br/>
 
-                <CardComponent shadow size='sm'>
-                    <h1>Cadastre-se</h1>
-                    <FormComponent onFormSubmit={(event) => this.handleCadastroFormSubmit(event.detail)}>
-                        <TextInputComponent
-                            name='userName'
-                            placeholder='Usuário'
-                            validate='required'
-                        />
-                        <EmailInputComponent
-                            name='userEmail'
-                            placeholder='Email'
-                            validate='required'
-                        />
-                        <CPFInputComponent
-                            name='usarCPF'
-                            placeholder='CPF'
-                            validate='required'
-                        />
-                        <PasswordInputComponent 
-                                name='userPassword'
-                                placeholder='Senha'
-                                validate='required' />
+                            <ButtonComponent 
+                                    name='confirmCadButton'
+                                    label='Cadastrar'
+                                    color='primary'/>
 
-                        <input type="checkbox" />Li e concordo com os Termos.*
-                        <br/><br/>
+                        </FormComponent>
 
-                        <ButtonComponent 
-                                name='confirmCadButton'
-                                label='Cadastrar'
-                                color='primary'/>
-
-                    </FormComponent>
-
-                </CardComponent>       
+                    </CardComponent>       
+                </Column>
             </Container>
         );
     }

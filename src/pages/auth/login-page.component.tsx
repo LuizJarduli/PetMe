@@ -71,7 +71,7 @@ export class LoginPageComponent extends Component {
                 <Column>
                     <img src='../../assets/logo/logo.png' alt=''></img>
                     <span>Miclaa</span>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec aliquam leo. Mauris eleifend, nibh at lacinia porttitor.</p>
+                    <p></p>
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>
