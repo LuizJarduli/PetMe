@@ -25,6 +25,7 @@ export class FormComponent extends Component<IFormProperties> {
 		this.onFormSubmit.bind(this);
 		this.setState.bind(this);
 		this.setFormStateValue.bind(this);
+		this.submitForm.bind(this);
 	}
 
     state: { submitData: { [key: string]: any }, errors: any} = {
