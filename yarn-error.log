@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add @types/react-input-mask
+  C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\yarn\bin\yarn.js add @types/react-input-mask C:/Program Files/Git/ @types/styled-components
 
 PATH: 
   C:\Users\luizj\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\luizj\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Python310\Scripts;C:\Python310;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;C:\Users\luizj\AppData\Roaming\nvm;C:\Program Files\nodejs;C:\Gradle\gradle-7.4.1\bin;C:\Users\luizj\AppData\Local\Microsoft\WindowsApps;C:\Users\luizj\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\luizj\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, lstat 'C:\Users\luizj\Desktop\FATEC\Repo\PetMe\node_modules\resolve'
+  Error: EINVAL: invalid argument, mkdir 'C:\Users\luizj\AppData\Local\Yarn\Cache\v6\npm-rogram-iles-0.0.0-674e2b7b-468b-4014-92ce-8e36e005a6dc-1651941163348\node_modules\C:\Program Files'
 
 npm manifest: 
   {
@@ -46,6 +46,7 @@ npm manifest:
   		"react-input-mask": "^2.0.4",
   		"react-router-dom": "^6.2.2",
   		"react-sticky-box": "^1.0.1",
+  		"react-toastify": "^9.0.1",
   		"styled-components": "^5.3.3"
   	},
   	"devDependencies": {
@@ -58,6 +59,7 @@ npm manifest:
   		"@babel/runtime": "^7.17.2",
   		"@types/react": "^17.0.39",
   		"@types/react-dom": "^17.0.13",
+  		"@types/react-input-mask": "^3.0.1",
   		"@types/styled-components": "^5.1.24",
   		"@typescript-eslint/eslint-plugin": "^5.14.0",
   		"@typescript-eslint/parser": "^5.14.0",
@@ -1338,6 +1340,13 @@ Lockfile:
     version "17.0.13"
     resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-17.0.13.tgz"
     integrity sha512-wEP+B8hzvy6ORDv1QBhcQia4j6ea4SFIBttHYpXKPFZRviBvknq0FRh3VrIxeXUmsPkwuXVZrVGG7KUVONmXCQ==
+    dependencies:
+      "@types/react" "*"
+  
+  "@types/react-input-mask@^3.0.1":
+    version "3.0.1"
+    resolved "https://registry.yarnpkg.com/@types/react-input-mask/-/react-input-mask-3.0.1.tgz#9cba08b3084fe1f9426274dff086e12b4696a3aa"
+    integrity sha512-rGOW8t2Ac558TAAnaq5ZZDGHu1siTblBeY30ggAQ9sX89y2MX0/FFVDLd2DT85QRpYIQOrb7QzkF9RCoV2+nZg==
     dependencies:
       "@types/react" "*"
   

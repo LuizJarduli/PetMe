@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { ButtonComponent } from '../../components/buttons/button.component';
 import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
@@ -30,8 +31,8 @@ export class LoginPageComponent extends Component {
     private handleLoginFormSubmit(formData: any): void {
         this.setState({ loading: true });
         AuthApi.login({ username: formData.userName.value, password: formData.userPassword.value})
-            .then((response: ILoginResponse) => console.log('sucesso', response))
-            .catch((error) => console.log('erro', error))
+            .then((response: ILoginResponse) => toast.success('Login Efetuado com Sucesso. Bem vindo', { autoClose: 3000}))
+            .catch((error) => toast.error(error, { autoClose: 3000 }))
             .finally(() => this.setState({ loading: false}))
     }
 
