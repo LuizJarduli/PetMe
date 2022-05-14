@@ -41,7 +41,7 @@ export class CadastroUsuarioComponent extends Component {
         })
         .then((response: IUserPropertiesModel) => toast.success('Cadastro realizado com sucesso!'))
         .catch((error) => toast.error(error))
-        .finally(() => this.setState({ loading: true, redirect: '/meu-perfil' }));
+        .finally(() => this.setState({ loading: false, redirect: '/meu-perfil' }));
     }
 
     /**
