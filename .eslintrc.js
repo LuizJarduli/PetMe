@@ -35,6 +35,7 @@ module.exports = {
         '@typescript-eslint/no-inferrable-types': 'off',
         '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
-        'quotes': [2, 'single', { 'avoidEscape': true }]
+        'quotes': [2, 'single', { 'avoidEscape': true }],
+        'jsx-a11y/anchor-is-valid': 'off',
     },
 };
