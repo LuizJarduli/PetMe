@@ -11,7 +11,8 @@
 		"format": "prettier --write \"./src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
 		"start:back": "mvn -f \"../BackPetme/PetMe/springboot.tg/\" spring-boot:run",
 		"start:docker-mysql": "docker start petme-mysql",
-		"start:full": "yarn start:docker-mysql && yarn start:back"
+		"start:full": "yarn start:docker-mysql && yarn start:back",
+		"start:swagger": "start chrome http://localhost:8080/swagger-ui/"
 	},
 	"repository": {
 		"type": "git",
