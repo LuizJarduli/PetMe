@@ -9,6 +9,9 @@ import { Column, Container } from './style';
 import { CPFInputComponent } from '../../../components/form/inputs/cpf-input/cpf-input.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
 import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
+import { LoadingComponent } from '../../../components/utility-components/loading.component';
+import { Navigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 /**
  * Pagina Cadastro Usuario
@@ -21,15 +24,24 @@ export class CadastroUsuarioComponent extends Component {
         super(props);
     }
 
+    state: { redirect: false, loading: false};
+
+    /**
+     * Efetua o cadastro do usuário na API
+     *
+     * @param formData dados do formulário
+     */
     private handleCadastroFormSubmit(formData: any): void {
+        this.setState({ loading: true });
         userApi.create({
             username: formData.userName.value,
             senha: formData.userPassword.value,
             cpf: formData.usarCPF.value,
             email: formData.userEmail.value,
         })
-        .then((response: IUserPropertiesModel) => console.log('sucesso', response))
-        .catch((error) => console.log('erro', error));
+        .then((response: IUserPropertiesModel) => toast.success('Cadastro realizado com sucesso!'))
+        .catch((error) => toast.error(error))
+        .finally(() => this.setState({ loading: true, redirect: '/meu-perfil' }));
     }
 
     /**
@@ -52,6 +64,8 @@ export class CadastroUsuarioComponent extends Component {
     render(): JSX.Element {
         return(
             <Container>
+                 { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
+                 { this.state?.redirect && <Navigate to={this.state.redirect} />}
                 <Column>
                     <img src="../../assets/logo/logo.png" alt="Logo"></img>
                     <p>Miclaa</p>
@@ -79,17 +93,14 @@ export class CadastroUsuarioComponent extends Component {
                                     name='userPassword'
                                     placeholder='Senha'
                                     validate='required' />
-
-                            <input type="checkbox" />Li e concordo com os Termos.*
+                            <input type="checkbox" required />&nbsp;&nbsp;Li e concordo com os Termos.*
                             <br/><br/>
-
                             <ButtonComponent 
                                     name='confirmCadButton'
                                     label='Cadastrar'
                                     color='primary'/>
 
                         </FormComponent>
-
                     </CardComponent>       
                 </Column>
             </Container>
