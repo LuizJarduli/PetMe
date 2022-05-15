@@ -9,6 +9,8 @@ export const MenuContainer = styled.nav`
     height: 65px;
     background: var(--white);
     border-bottom: 1px solid rgba(142, 142, 142, 0.8);
+    padding-left: 50px;
+    padding-right: 50px;
 `;
 
 export const LeftMenuContent = styled.div`
