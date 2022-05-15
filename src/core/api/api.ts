@@ -80,11 +80,33 @@ export class ApiService {
      * @param body 
      */
     public request<T>(body: T): RequestInit {
-        return {
+        const request: RequestInit = {
             headers: this._headers,
             method: this._method,
-            body: JSON.stringify(body),
+        };
+        this.hasBody(body) && (request.body = JSON.stringify(body));
+        return request;
+    }
+
+    /**
+     * Indica se existe um Body para enviar na requisição
+     *
+     * @param body 
+     */
+    private hasBody<T>(body: T): boolean {
+        return Object.entries(body)?.length > 0
+    }
+
+    /**
+     * Trata o response da API para separar possíveis Bad Requests
+     * @param data Resposta da Api
+     */
+    private getStatus(data: any): any | Error {
+        if (data?.status) {
+            throw new Error(data?.message || 'Desculpe, ocorreu um erro interno.');
         }
+
+        return data;
     }
 
     /**
@@ -95,7 +117,7 @@ export class ApiService {
     public call(endpoint: string, params: any = {}): Promise<any> {
         return fetch(endpoint, this.request(params))
             .then((response) => response.json())
-            .then((data) => data)
-            .catch((error) => Promise.reject(`Desculpe, ocorreu um erro interno. Erro: ${error}`))
+            .then((data) => this.getStatus(data))
+            .catch((error) => Promise.reject(`Desculpe, ocorreu um erro interno. \nErro: ${error.message}`));
     }
 }

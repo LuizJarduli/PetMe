@@ -19,4 +19,17 @@ export class userApi {
                 .catch((error: any) => reject(error));
         });
     }
+
+    /**
+     * Efetua o Login na API do sistema
+     *
+     * @param params 
+     */
+     public static get(id: number): Promise<IUserPropertiesModel> {
+        return new Promise<IUserPropertiesModel>((resolve, reject) => {
+            ApiService.getInstance().setMethod('GET').call(`http://localhost:8080/usuarios/${id}`)
+                .then((response: IUserPropertiesModel) => resolve(response))
+                .catch((error: any) => reject(error));
+        });
+    }
 }
