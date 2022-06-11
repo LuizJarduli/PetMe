@@ -34,7 +34,7 @@ export const LeftMenuContent = styled.div`
         justify-content: center;
         align-items: center;
         margin: 0;
-        font-family: 'Signika Negative', sans-serif;
+        font-family: 'Indie Flower', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 30px;
@@ -42,15 +42,11 @@ export const LeftMenuContent = styled.div`
         margin-left: 10px;
     }
 
-    @media (max-width: 540px) {
-
-    }
 `;
 
 export const RightMenuContent = styled.div`
     margin: 0;
     padding: 0;
-
     > ul {
         display: flex;
         flex-direction: row;
@@ -69,5 +65,9 @@ export const RightMenuContent = styled.div`
 
     > ul > li > button > img {
         width: 35px;
+    }
+
+    @media (max-width: 540px) {
+        display: none;
     }
 `

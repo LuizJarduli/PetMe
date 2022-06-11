@@ -33,6 +33,11 @@ export const UserPetsList = styled.div`
     width: 100vw;
     margin: 0;
     padding: 50px;
+    
+    @media (max-width: 540px){
+        padding: 30px;
+    }
+
 `;
 
 export const PetContainer = styled.div`
@@ -42,8 +47,9 @@ export const PetContainer = styled.div`
     width: 30%;
     height: auto;
 
+
     > img {
-        width: calc(100vw / 3.6);
+        width: calc(105vw / 3.6);
         height: 250px;
         border-radius: 5px;
         object-fit: cover;
@@ -56,8 +62,10 @@ export const PetContainer = styled.div`
     }
 
     @media (max-width: 540px) {
+
+        margin-bottom: 1.5em;
         > img {
-            width: calc(80vw);
+            width: calc(85vw);
         }
     }
 `;

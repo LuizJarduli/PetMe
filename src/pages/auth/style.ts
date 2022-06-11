@@ -24,7 +24,7 @@ export const Column = styled.div`
     padding: 10px;
 
     > span {
-        font-family: 'Signika Negative', sans-serif;
+        font-family: 'Indie Flower', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 110px;

@@ -11,15 +11,6 @@ export const Container = styled.div`
     justify-content: center;
     padding: 20px;
 
-    > text {
-        font-family: 'Indie Flower', sans-serif;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 80px;
-        line-height: 50px;
-        color: var(--black);
-    }
-
     > img {
         width: 160px;
         height: 148px;
@@ -28,14 +19,8 @@ export const Container = styled.div`
 
     @media (max-width: 540px) {
 
-        > img {
-            width: calc(160px / 1.2);
-            height: calc(148px / 1.2);
-        }
+        flex-direction: column;
 
-        > text {
-            font-size: calc(80px;/ 1.2);
-        }
     }
 
 `;
@@ -70,7 +55,7 @@ export const Column = styled.div`
     padding: 10px;
 
     > span {
-        font-family: 'Signika Negative', sans-serif;
+        font-family: 'Indie Flower', sans-serif;
         font-style: normal;
         font-weight: 600;
         font-size: 110px;

@@ -91,7 +91,7 @@ export class LoginPageComponent extends Component {
                                 color='primary'/>
                         </FormComponent>
                         <ForgetPasswordOption>
-                            <ForgetPasswordLabel>
+                            <ForgetPasswordLabel onClick={() => this.handleNavigate('/recuperar')}>
                                 Esqueceu a senha?
                             </ForgetPasswordLabel>
                         </ForgetPasswordOption>

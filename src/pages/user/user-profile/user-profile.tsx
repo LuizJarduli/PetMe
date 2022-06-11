@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import { TopMenuComponent } from '../../../components/menu/top/top-menu.component';
+import { BotMenuComponent } from '../../../components/menu/bot/bot-menu.component';
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
 import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
@@ -68,7 +69,7 @@ export class UserProfilePageComponent extends Component {
 
         return (
             <>
-                { loading && (<LoadingComponent></LoadingComponent>) }
+                { loading && (<LoadingComponent></LoadingComponent>) }               
                 <TopMenuComponent />
                 { activeComponent && (
                     <UserProfileInfo>
@@ -81,7 +82,7 @@ export class UserProfilePageComponent extends Component {
                     </UserProfileInfo>
                 )}
                 <UserPetsList>
-                    <hr />
+                    
                     <div className='row'>
                         { pets?.map((pet: any, index: number) => {
                             return (
@@ -94,6 +95,7 @@ export class UserProfilePageComponent extends Component {
                         })}
                     </div>
                 </UserPetsList>
+                <BotMenuComponent/>
             </>
         );
     }
