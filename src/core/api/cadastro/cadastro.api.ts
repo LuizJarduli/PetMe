@@ -25,9 +25,9 @@ export class userApi {
      *
      * @param params 
      */
-     public static get(id: number): Promise<IUserPropertiesModel> {
+     public static get(userName: string): Promise<IUserPropertiesModel> {
         return new Promise<IUserPropertiesModel>((resolve, reject) => {
-            ApiService.getInstance().setMethod('GET').call(`http://localhost:8080/usuarios/${id}`)
+            ApiService.getInstance().setMethod('GET').call(`http://localhost:8080/usuarios/${userName}`)
                 .then((response: IUserPropertiesModel) => resolve(response))
                 .catch((error: any) => reject(error));
         });

@@ -9,6 +9,7 @@ import { TextInputComponent } from '../../components/form/inputs/text-input/text
 import { LoadingComponent } from '../../components/utility-components/loading.component';
 import { AuthApi } from '../../core/api/auth/auth.api';
 import { ILoginProperties, ILoginResponse } from '../../core/api/auth/auth.api.properties';
+import { StorageService } from '../../core/services/storageService';
 import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './style';
 
 /**
@@ -29,9 +30,19 @@ export class LoginPageComponent extends Component {
      * @param formData dados de Login
      */
     private handleLoginFormSubmit(formData: any): void {
+        
         this.setState({ loading: true });
-        AuthApi.login({ username: formData.userName.value, password: formData.userPassword.value})
-            .then((response: ILoginResponse) => toast.success('Login Efetuado com Sucesso. Bem vindo', { autoClose: 3000}))
+        AuthApi.login({ username: formData.userName.value, senha: formData.userPassword.value})
+            .then((response: ILoginResponse) => {
+                toast.success('Login Efetuado com Sucesso. Bem vindo', { autoClose: 3000});
+                StorageService.getInstance().clearStorage();
+                StorageService.getInstance().setUser({ 
+                    username: formData.userName.value,
+                    senha: formData.userPassword.value,
+                    token: response,
+                });
+                this.handleNavigate('/meu-perfil');
+            })
             .catch((error) => toast.error(error, { autoClose: 3000 }))
             .finally(() => this.setState({ loading: false}))
     }

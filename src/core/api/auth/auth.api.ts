@@ -14,7 +14,7 @@ export class AuthApi {
      */
     public static login(params: ILoginProperties): Promise<ILoginResponse> {
         return new Promise<ILoginResponse>((resolve, reject) => {
-            ApiService.getInstance().setMethod('POST').call('https://restful-booker.herokuapp.com/auth', params)
+            ApiService.getInstance().setMethod('POST').call('http://localhost:8080/login', params)
                 .then((response: ILoginResponse) => resolve(response))
                 .catch((error: any) => reject(error));
         });

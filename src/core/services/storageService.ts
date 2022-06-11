@@ -27,7 +27,14 @@ export class StorageService {
     /**
      * Recupera os dados do usuário logado
      */
-    public getUser(): IUserPropertiesModel {
+    public getUser(): any {
         return JSON.parse(sessionStorage.getItem('userLogged') as string);
+    }
+
+    /**
+     * Remove o usuário armazenado na sessão do browser
+     */
+    public clearStorage(): void {
+        sessionStorage.removeItem('userLogged');
     }
 }
