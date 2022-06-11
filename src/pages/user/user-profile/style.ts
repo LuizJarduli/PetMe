@@ -16,12 +16,12 @@ export const UserProfileInfo = styled.div`
 `;
 
 export const UserProfilePicture = styled.div`
-    width: 250px;
+    width: 200px;
     padding: 10px;
     margin: 0;
 
     > img {
-        width: 200px;
+        width: 180px;
     }
 `;
 

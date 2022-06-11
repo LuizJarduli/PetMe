@@ -76,13 +76,11 @@ export class UserProfilePageComponent extends Component {
                             <img src={ profilePic ? profilePic : '../../../assets/default/default-profile.png' } alt="Imagem de Perfil"/>
                         </UserProfilePicture>
                         <UserProfileData>
-                            <h3>{ username || 'Teste' }</h3>
-                            <h4>{ email || 'Teste' }</h4>
+                            <h3>{ username || 'Username' }</h3>
                         </UserProfileData>
                     </UserProfileInfo>
                 )}
                 <UserPetsList>
-                    <h3>Meus Pets</h3>
                     <hr />
                     <div className='row'>
                         { pets?.map((pet: any, index: number) => {
@@ -90,7 +88,6 @@ export class UserProfilePageComponent extends Component {
                                 <div className='col-sm-4 text-center' key={index}>
                                     <PetContainer>
                                         <img src={`../../../assets/default/pet${index+1}.jpg`} alt="Imagem de Perfil"/>
-                                        <h5>{pet.nome || 'Gato Cachorro Passarinho' }</h5>
                                     </PetContainer>
                                 </div>
                             )

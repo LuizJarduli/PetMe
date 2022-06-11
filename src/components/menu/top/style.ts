@@ -11,6 +11,11 @@ export const MenuContainer = styled.nav`
     border-bottom: 1px solid rgba(142, 142, 142, 0.8);
     padding-left: 50px;
     padding-right: 50px;
+
+    @media (max-width: 540px) {
+        padding-left: 5px;
+    }
+
 `;
 
 export const LeftMenuContent = styled.div`
@@ -35,6 +40,10 @@ export const LeftMenuContent = styled.div`
         font-size: 30px;
         text-align: center;
         margin-left: 10px;
+    }
+
+    @media (max-width: 540px) {
+
     }
 `;
 
