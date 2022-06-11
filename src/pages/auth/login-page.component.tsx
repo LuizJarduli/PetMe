@@ -70,7 +70,7 @@ export class LoginPageComponent extends Component {
                 { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
                 <Column>
                     <img src='../../assets/logo/logo.png' alt=''></img>
-                    <span>Miclaa</span>
+                    <span>Maskota</span>
                     <p></p>
                 </Column>
                 <Column>
