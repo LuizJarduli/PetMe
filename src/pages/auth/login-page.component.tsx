@@ -30,7 +30,6 @@ export class LoginPageComponent extends Component {
      * @param formData dados de Login
      */
     private handleLoginFormSubmit(formData: any): void {
-        
         this.setState({ loading: true });
         AuthApi.login({ username: formData.userName.value, senha: formData.userPassword.value})
             .then((response: ILoginResponse) => {
@@ -61,7 +60,10 @@ export class LoginPageComponent extends Component {
     componentDidMount(): void {
         document.addEventListener('onFormSubmit', (event) => {
             event.stopPropagation();
-            this.handleLoginFormSubmit((event as CustomEvent).detail)
+            const path: string[] = window.location.href?.split('/');
+            if (path[path.length - 1] === '') {
+                this.handleLoginFormSubmit((event as CustomEvent).detail)
+            }
         });
     }
 

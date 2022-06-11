@@ -42,7 +42,6 @@ export class UserProfilePageComponent extends Component {
         userApi.get(userName)
             .then((response: IUserPropertiesModel) => {
                 this.setState({ userData: response});
-                console.log(response);
             })
             .catch((error) => toast.error(error))
             .finally(() => this.setState({ loading: false, activeComponent: true }));
@@ -56,7 +55,6 @@ export class UserProfilePageComponent extends Component {
         const { userData, loading, activeComponent } = this.state || {};
         const { username, email, profilePic } = userData || {};
 
-        console.log(userData);
         const pets: any = [
             {
                 idPet: 1,

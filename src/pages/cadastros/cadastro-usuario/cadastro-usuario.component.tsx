@@ -50,7 +50,10 @@ export class CadastroUsuarioComponent extends Component {
     componentDidMount(): void {
         document.addEventListener('onFormSubmit', (event) => {
             event.stopPropagation();
-            this.handleCadastroFormSubmit((event as CustomEvent).detail)
+            const path: string[] = window.location.href?.split('/');
+            if (path[path.length - 1] === 'cadastro') {
+                this.handleCadastroFormSubmit((event as CustomEvent).detail)
+            }
         });
     }
 
