@@ -10,12 +10,12 @@ export class ApiService {
     constructor (private _authToken: string = '') { 
         this.setHeaders([
             {
-                key: 'Accept',
+                key: 'Content-Type',
                 value: 'application/json',
             },
             {
-                key: 'Content-Type',
-                value: 'application/json',
+                key: 'Access-Control-Allow-Origin',
+                value: '*'
             }
         ])
     }
@@ -110,13 +110,27 @@ export class ApiService {
     }
 
     /**
+     * Verifica se o response é um JSON ou string
+     * @param data response da API
+     */
+    private async getBodyResponse(data: any): Promise<any> {
+		let isValid: boolean = true;
+    	try {
+			await data.clone().json();
+		} catch (error) {
+			isValid = false;
+		}
+		return isValid ? data.json() : data.text();
+    }
+
+    /**
      * Executa a chamada na API
      * @param endpoint endpoint no qual será feito a chamada
      * @param params body da requisição 
      */
     public call(endpoint: string, params: any = {}): Promise<any> {
         return fetch(endpoint, this.request(params))
-            .then((response) => response.json())
+            .then(async (response) => await this.getBodyResponse(response))
             .then((data) => this.getStatus(data))
             .catch((error) => Promise.reject(`Desculpe, ocorreu um erro interno. \nErro: ${error.message}`));
     }

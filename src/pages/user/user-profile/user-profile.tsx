@@ -5,6 +5,7 @@ import { BotMenuComponent } from '../../../components/menu/bot/bot-menu.componen
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
 import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
+import { StorageService } from '../../../core/services/storageService';
 import { PetContainer, UserPetsList, UserProfileData, UserProfileInfo, UserProfilePicture } from './style';
 
 /**
@@ -28,7 +29,8 @@ export class UserProfilePageComponent extends Component {
      * Chamado imediatamente após a montagem do componente.
      */
     componentDidMount(): void {
-        this.getUserData(13); // Organizar service para recuperar id do user logado
+        const { username, token } = StorageService.getInstance().getUser();
+        this.getUserData(username); // Organizar service para recuperar id do user logado
     }
 
     /**
@@ -36,10 +38,12 @@ export class UserProfilePageComponent extends Component {
      *
      * @param userId id do usuário logado
      */
-    private getUserData(userId: number): void {
+    private getUserData(userName: string): void {
         this.setState({ loading: true});
-        userApi.get(userId)
-            .then((response: IUserPropertiesModel) => this.setState({ userData: response}))
+        userApi.get(userName)
+            .then((response: IUserPropertiesModel) => {
+                this.setState({ userData: response});
+            })
             .catch((error) => toast.error(error))
             .finally(() => this.setState({ loading: false, activeComponent: true }));
     }

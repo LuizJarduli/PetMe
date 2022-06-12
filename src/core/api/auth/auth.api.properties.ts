@@ -1,6 +1,6 @@
 export interface ILoginProperties {
     username: string;
-    password: string;
+    senha: string;
 }
 
 export interface ILoginResponse {

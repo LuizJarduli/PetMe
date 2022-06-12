@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LoginPageComponent } from './pages/auth/login-page.component';
 import { CadastroUsuarioComponent } from './pages/cadastros/cadastro-usuario/cadastro-usuario.component';
 import { RecuperarSenhaComponent } from './pages/cadastros/recuperar-senha/recuperar-senha.component';
+import { FeedPageComponent } from './pages/feed/feed.component';
 import { NoPageComponent } from './pages/no-page/no-page.component';
 import { UserProfilePageComponent } from './pages/user/user-profile/user-profile';
 
@@ -19,6 +20,7 @@ export function AppRoutes(): JSX.Element {
                 <Route path='cadastro'   element={<CadastroUsuarioComponent />}></Route>
                 <Route path='recuperar'  element={<RecuperarSenhaComponent />}></Route>
                 <Route path='meu-perfil' element={<UserProfilePageComponent />}></Route>
+                <Route path='home'       element={<FeedPageComponent />}></Route>
                 <Route path='*' element={<NoPageComponent />}></Route>
             </Routes>
         </Router>
