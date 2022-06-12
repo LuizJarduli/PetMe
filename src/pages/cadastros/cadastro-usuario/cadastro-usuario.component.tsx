@@ -39,9 +39,9 @@ export class CadastroUsuarioComponent extends Component {
             cpf: formData.usarCPF.value,
             email: formData.userEmail.value,
         })
-        .then((response: IUserPropertiesModel) => toast.success('Cadastro realizado com sucesso!'))
+        .then(() => toast.success('Cadastro realizado com sucesso!'))
         .catch((error) => toast.error(error))
-        .finally(() => this.setState({ loading: false, redirect: '/meu-perfil' }));
+        .finally(() => this.setState({ loading: false, redirect: '/' }));
     }
 
     /**
