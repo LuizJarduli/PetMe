@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
 import { TopMenuComponent } from '../../../components/menu/top/top-menu.component';
+import { BotMenuComponent } from '../../../components/menu/bot/bot-menu.component';
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
 import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
@@ -68,7 +69,7 @@ export class UserProfilePageComponent extends Component {
 
         return (
             <>
-                { loading && (<LoadingComponent></LoadingComponent>) }
+                { loading && (<LoadingComponent></LoadingComponent>) }               
                 <TopMenuComponent />
                 { activeComponent && (
                     <UserProfileInfo>
@@ -76,27 +77,25 @@ export class UserProfilePageComponent extends Component {
                             <img src={ profilePic ? profilePic : '../../../assets/default/default-profile.png' } alt="Imagem de Perfil"/>
                         </UserProfilePicture>
                         <UserProfileData>
-                            <h3>{ username || 'Teste' }</h3>
-                            <h4>{ email || 'Teste' }</h4>
+                            <h3>{ username || 'Username' }</h3>
                         </UserProfileData>
                     </UserProfileInfo>
                 )}
                 <UserPetsList>
-                    <h3>Meus Pets</h3>
-                    <hr />
+                    
                     <div className='row'>
                         { pets?.map((pet: any, index: number) => {
                             return (
                                 <div className='col-sm-4 text-center' key={index}>
                                     <PetContainer>
                                         <img src={`../../../assets/default/pet${index+1}.jpg`} alt="Imagem de Perfil"/>
-                                        <h5>{pet.nome || 'Gato Cachorro Passarinho' }</h5>
                                     </PetContainer>
                                 </div>
                             )
                         })}
                     </div>
                 </UserPetsList>
+                <BotMenuComponent/>
             </>
         );
     }
