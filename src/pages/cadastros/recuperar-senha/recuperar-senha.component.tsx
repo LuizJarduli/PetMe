@@ -3,7 +3,7 @@ import { CardComponent } from '../../../components/containers/card/card.componen
 import { FormComponent } from '../../../components/form/form.component';
 import { ButtonComponent } from '../../../components/buttons/button.component';
 import { EmailInputComponent } from '../../../components/form/inputs/email-input/email-input.component';
-import { Container, Separator, Box } from './style';
+import { Container, Separator, Box, Column } from './style';
 
 /**
  * Pagina Recuperar Senha
@@ -41,36 +41,38 @@ export class RecuperarSenhaComponent extends Component{
     render(): JSX.Element {
         return(
             <Container>
+                <Column>
+                    <img src="../../assets/logo/logo.png" alt="Logo"></img>
+                    <span>Maskota</span>
+                </Column>
+                <Column>
+                    <CardComponent shadow size='sm'>
+                        <h2>Recuperar Senha</h2>
+                        <FormComponent onFormSubmit={(event) => this.handleRecuperarFormSubmit(event.detail)}>
+                            <EmailInputComponent
+                                name='usarEmail'
+                                placeholder='Email'
+                                validate='required'
+                            />
 
-                <img src="../../assets/logo/logo.png" alt="Logo"></img>
-                <text>Miclaa</text>
+                            <ButtonComponent 
+                                    name='confirmButton'
+                                    label='Enviar'
+                                    color='primary'/>
 
-                <CardComponent shadow size='sm'>
-                    <h2>Recuperar Senha</h2>
-                    <FormComponent onFormSubmit={(event) => this.handleRecuperarFormSubmit(event.detail)}>
-                        <EmailInputComponent
-                            name='usarEmail'
-                            placeholder='Email'
-                            validate='required'
-                        />
+                        </FormComponent>
 
-                        <ButtonComponent 
-                                name='confirmButton'
-                                label='Enviar'
-                                color='primary'/>
+                        <Separator></Separator>
 
-                    </FormComponent>
+                        <Box>
+                            <ButtonComponent 
+                                name='backButton'
+                                label='Criar Conta'
+                                color='secondary'/>
+                        </Box>
 
-                    <Separator></Separator>
-
-                    <Box>
-                        <ButtonComponent 
-                            name='backButton'
-                            label='Criar Conta'
-                            color='secondary'/>
-                    </Box>
-
-                </CardComponent>       
+                    </CardComponent>
+                </Column>       
             </Container>
         );
     }

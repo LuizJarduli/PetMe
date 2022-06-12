@@ -71,7 +71,7 @@ export class CadastroUsuarioComponent extends Component {
                  { this.state?.redirect && <Navigate to={this.state.redirect} />}
                 <Column>
                     <img src="../../assets/logo/logo.png" alt="Logo"></img>
-                    <p>Miclaa</p>
+                    <p>Maskota</p>
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>

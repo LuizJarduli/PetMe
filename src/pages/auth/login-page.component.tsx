@@ -83,7 +83,7 @@ export class LoginPageComponent extends Component {
                 { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
                 <Column>
                     <img src='../../assets/logo/logo.png' alt=''></img>
-                    <span>Miclaa</span>
+                    <span>Maskota</span>
                     <p></p>
                 </Column>
                 <Column>
@@ -104,7 +104,7 @@ export class LoginPageComponent extends Component {
                                 color='primary'/>
                         </FormComponent>
                         <ForgetPasswordOption>
-                            <ForgetPasswordLabel>
+                            <ForgetPasswordLabel onClick={() => this.handleNavigate('/recuperar')}>
                                 Esqueceu a senha?
                             </ForgetPasswordLabel>
                         </ForgetPasswordOption>

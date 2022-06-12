@@ -2,7 +2,7 @@ import { Component, ReactNode } from 'react';
 import { Container, Text } from './style';
 
 /**
- * Pagina Cadastro Usuario
+ * Default Page
  * @author Gustavo Cecato
  * @since 
  */
