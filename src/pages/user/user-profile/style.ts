@@ -46,6 +46,7 @@ export const PetContainer = styled.div`
     border-radius: 5px;
     width: 30%;
     height: auto;
+    margin-top: 2rem; 
 
 
     > img {
