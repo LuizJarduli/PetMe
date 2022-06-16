@@ -54,7 +54,7 @@ export class UserProfilePageComponent extends Component {
     render(): JSX.Element {
         /** TODO: alinhar com back nome do atributo que guarda img de perfil */
         const { userData, loading, activeComponent } = this.state || {};
-        const { username, email, profilePic, pets } = userData || {};
+        const { username, email, fotoPerfil, pets } = userData || {};
 
         return (
             <>
@@ -63,7 +63,7 @@ export class UserProfilePageComponent extends Component {
                 { activeComponent && (
                     <UserProfileInfo>
                         <UserProfilePicture>
-                            <img src={ profilePic ? profilePic : '../../../assets/default/default-profile.png' } alt="Imagem de Perfil"/>
+                            <img src={ fotoPerfil ? fotoPerfil : '../../../assets/default/default-profile.png' } alt="Imagem de Perfil"/>
                         </UserProfilePicture>
                         <UserProfileData>
                             <h3>{ username || 'Username' }</h3>
