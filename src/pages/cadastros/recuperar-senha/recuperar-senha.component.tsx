@@ -43,7 +43,7 @@ export class RecuperarSenhaComponent extends Component{
             <Container>
                 <Column>
                     <img src="../../assets/logo/logo.png" alt="Logo"></img>
-                    <span>Maskota</span>
+                    <span>Maskotaa</span>
                 </Column>
                 <Column>
                     <CardComponent shadow size='sm'>
