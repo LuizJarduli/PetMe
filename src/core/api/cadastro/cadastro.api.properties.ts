@@ -5,7 +5,7 @@ export interface IUserPropertiesModel {
     senha: string;
     username: string;
     pets: IUserPetPropertiesModel[];
-    profilePic: string;
+    fotoPerfil: string;
 }
 
 export interface IUserPetPropertiesModel {

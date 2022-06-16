@@ -6,6 +6,7 @@ import { CardComponent } from '../../components/containers/card/card.component';
 import { FormComponent } from '../../components/form/form.component';
 import { PasswordInputComponent } from '../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../components/form/inputs/text-input/text-input.component';
+import CropperComponent from '../../components/form/inputs/file-cropped-input/file-cropper-input.component';
 import { LoadingComponent } from '../../components/utility-components/loading.component';
 import { AuthApi } from '../../core/api/auth/auth.api';
 import { ILoginProperties, ILoginResponse } from '../../core/api/auth/auth.api.properties';
