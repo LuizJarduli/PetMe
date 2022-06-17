@@ -2,20 +2,18 @@ import styled from 'styled-components';
 
 export const CadItemContainer = styled.div`
     
-    margin: 0;
-    padding: 0;
     border-radius: 5px;
     border: 1px solid #CCC;
     width: 580px;
     height: 600px;
-    margin-left: 15px;
     background: var(--white);
     flex-direction: row;
+    margin-left: 2em;
 
     @media (max-width: 540px) {
         width: 100%;
+        flex-direction: column;
         margin-right: 0.8em;
-        margin-top: 60%;
 
     }
   
@@ -29,6 +27,7 @@ export const CadItemHeader = styled.div`
     height: 10%;
     border-radius: 5px;
     border-bottom: 1px solid #CCC;
+    
 `
 
 export const CadItemBody = styled.div`

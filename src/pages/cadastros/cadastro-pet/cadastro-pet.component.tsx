@@ -68,7 +68,7 @@ export class CadastroPetComponent extends Component {
     render(): JSX.Element {
         return(
             <>
-                <TopMenuComponent></TopMenuComponent>
+                <TopMenuComponent/>
                 <Container>
                     { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
                     { this.state?.redirect && <Navigate to={this.state.redirect} />}
@@ -115,7 +115,7 @@ export class CadastroPetComponent extends Component {
                         </CardComponent>       
                     </Column>
                 </Container>
-                <BotMenuComponent></BotMenuComponent>
+                <BotMenuComponent/>
             </>
 
         );

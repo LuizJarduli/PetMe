@@ -24,7 +24,7 @@ export const Container = styled.div`
             font-size: 60px;
             line-height: 60px;
         }
-
+        
         flex-direction: column;
     }
 `;
