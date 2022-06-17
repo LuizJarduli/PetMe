@@ -11,7 +11,7 @@ export const MenuContainer = styled.nav`
 	transform: translateZ(0);
 	height:60px;
     border-top: 1px solid rgba(142, 142, 142, 0.8);
-	background: var(--white);;
+	background: var(--white);
 
     @media (max-width: 540px) {
         display: flex;

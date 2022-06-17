@@ -2,11 +2,12 @@ import { Component } from 'react';
 import { CardComponent } from '../../../components/containers/card/card.component';
 import { FormComponent } from '../../../components/form/form.component';
 import { ButtonComponent } from '../../../components/buttons/button.component';
-import { PasswordInputComponent } from '../../../components/form/inputs/password-input/password-input.component';
+import { PhoneInputComponent } from '../../../components/form/inputs/phone-input/phone-input.component';
 import { TextInputComponent } from '../../../components/form/inputs/text-input/text-input.component';
-import { EmailInputComponent } from '../../../components/form/inputs/email-input/email-input.component';
 import { Column, Container } from './style';
-import { CPFInputComponent } from '../../../components/form/inputs/cpf-input/cpf-input.component';
+import { TopMenuComponent } from '../../../components/menu/top/top-menu.component';
+import { BotMenuComponent } from '../../../components/menu/bot/bot-menu.component';
+import { CadItemComponent } from '../../../components/containers/card/cad-item/cad-item.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
 import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
@@ -14,11 +15,11 @@ import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 /**
- * Pagina Cadastro Usuario
+ * Pagina Cadastro Pet
  * @author Gustavo Cecato
- * @since 03/2022
+ * @since 06/2022
  */
-export class CadastroUsuarioComponent extends Component {
+export class CadastroPetComponent extends Component {
 
     constructor(props: typeof Component) {
         super(props);
@@ -66,46 +67,57 @@ export class CadastroUsuarioComponent extends Component {
 
     render(): JSX.Element {
         return(
-            <Container>
-                 { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
-                 { this.state?.redirect && <Navigate to={this.state.redirect} />}
-                <Column>
-                    <img src="../../assets/logo/logo.png" alt="Logo"></img>
-                    <p>Maskota</p>
-                </Column>
-                <Column>
-                    <CardComponent shadow size='sm'>
-                        <h1>Cadastre-se</h1>
-                        <FormComponent onFormSubmit={(event) => this.handleCadastroFormSubmit(event.detail)}>
-                            <TextInputComponent
-                                name='userName'
-                                placeholder='Usuário'
-                                validate='required'
-                            />
-                            <EmailInputComponent
-                                name='userEmail'
-                                placeholder='Email'
-                                validate='required'
-                            />
-                            <CPFInputComponent
-                                name='usarCPF'
-                                placeholder='CPF'
-                                validate='required'
-                            />
-                            <PasswordInputComponent 
-                                    name='userPassword'
-                                    placeholder='Senha'
+            <>
+                <TopMenuComponent></TopMenuComponent>
+                <Container>
+                    { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
+                    { this.state?.redirect && <Navigate to={this.state.redirect} />}
+                    
+                    <Column>
+                        <CadItemComponent>
+                        </CadItemComponent>
+                    </Column>
+                    <Column>
+                        <CardComponent size='md'>
+                            
+                            <FormComponent onFormSubmit={(event) => this.handleCadastroFormSubmit(event.detail)}>
+                                <TextInputComponent 
+                                    name='petName'
+                                    placeholder='Nome do Maskote'
                                     validate='required' />
-                            <br/><br/>
-                            <ButtonComponent 
+
+                                <TextInputComponent 
+                                    name='descricao'
+                                    placeholder='Descrição'
+                                    validate='required' />
+
+                                <PhoneInputComponent 
+                                    name='petTelefone'
+                                    placeholder='Número (xx)xxxxx-xxxx'
+                                    validate='required' />
+
+                                <TextInputComponent 
+                                    name='petEstado'
+                                    placeholder='Estado'
+                                    validate='required' />
+                                
+                                <TextInputComponent 
+                                    name='petCidade'
+                                    placeholder='Cidade'
+                                    validate='required' />
+
+                                <ButtonComponent 
                                     name='confirmCadButton'
                                     label='Cadastrar'
                                     color='primary'/>
 
-                        </FormComponent>
-                    </CardComponent>       
-                </Column>
-            </Container>
+                            </FormComponent>
+                        </CardComponent>       
+                    </Column>
+                </Container>
+                <BotMenuComponent></BotMenuComponent>
+            </>
+
         );
     }
 }

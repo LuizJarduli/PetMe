@@ -5,6 +5,7 @@ import { RecuperarSenhaComponent } from './pages/cadastros/recuperar-senha/recup
 import { FeedPageComponent } from './pages/feed/feed.component';
 import { NoPageComponent } from './pages/no-page/no-page.component';
 import { UserProfilePageComponent } from './pages/user/user-profile/user-profile';
+import { CadastroPetComponent } from './pages/cadastros/cadastro-pet/cadastro-pet.component';
 
 /**
  * Todas as rotas do projeto passarão por aqui
@@ -16,11 +17,12 @@ export function AppRoutes(): JSX.Element {
     return (
         <Router>
             <Routes>
-                <Route path='/'          element={<LoginPageComponent />}></Route>
-                <Route path='cadastro'   element={<CadastroUsuarioComponent />}></Route>
-                <Route path='recuperar'  element={<RecuperarSenhaComponent />}></Route>
-                <Route path='meu-perfil' element={<UserProfilePageComponent />}></Route>
-                <Route path='home'       element={<FeedPageComponent />}></Route>
+                <Route path='/'             element={<LoginPageComponent />}></Route>
+                <Route path='cadastro'      element={<CadastroUsuarioComponent />}></Route>
+                <Route path='recuperar'     element={<RecuperarSenhaComponent />}></Route>
+                <Route path='meu-perfil'    element={<UserProfilePageComponent />}></Route>
+                <Route path='home'          element={<FeedPageComponent />}></Route>
+                <Route path='cadastro-pet'  element={<CadastroPetComponent />}></Route>
                 <Route path='*' element={<NoPageComponent />}></Route>
             </Routes>
         </Router>
