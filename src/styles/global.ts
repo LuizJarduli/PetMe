@@ -28,10 +28,31 @@ export default createGlobalStyle`
         --button-secondary: #636363;
     }
 
+    /* Firefox */
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: #75AA62 lightGrey;
+    }
+
+    /* Works on Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: lightGrey;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: #75AA62;
+        border-radius: 20px;
+    }
+
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        overflow-x: none;
     }
 
     html, body, #root {
@@ -55,5 +76,7 @@ export default createGlobalStyle`
 
     body {
         background-color: var(--primary);
+        /* Works on Firefox */
     }
+    
 `

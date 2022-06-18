@@ -12,6 +12,7 @@ import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.pr
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
 import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { FileInputComponent } from '../../../components/form/inputs/file-cropped-input/file-input.component';
 
 /**
  * Pagina Cadastro Usuario
@@ -38,6 +39,7 @@ export class CadastroUsuarioComponent extends Component {
             senha: formData.userPassword.value,
             cpf: formData.usarCPF.value,
             email: formData.userEmail.value,
+            fotoPerfil: formData.fotoPerfil.value,
         })
         .then(() => toast.success('Cadastro realizado com sucesso!'))
         .catch((error) => toast.error(error))
@@ -96,7 +98,10 @@ export class CadastroUsuarioComponent extends Component {
                                     name='userPassword'
                                     placeholder='Senha'
                                     validate='required' />
-                            <br/><br/>
+                            <FileInputComponent
+                                    name='fotoPerfil'/>
+                            <hr />
+                            <br/>
                             <ButtonComponent 
                                     name='confirmCadButton'
                                     label='Cadastrar'

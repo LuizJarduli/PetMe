@@ -11,6 +11,7 @@ export const MenuContainer = styled.nav`
     border-bottom: 1px solid rgba(142, 142, 142, 0.8);
     padding-left: 50px;
     padding-right: 50px;
+    z-index: 1;
 
     @media (max-width: 540px) {
         padding-left: 5px;
