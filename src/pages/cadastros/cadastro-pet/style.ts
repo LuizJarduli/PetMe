@@ -70,3 +70,15 @@ export const Column = styled.div`
         }
     }
 `;
+
+export const Aux = styled.div`
+
+    @media (max-width: 540px) {
+        width: 200px;
+        height: 10px;
+        padding: 65px;
+        background: rgba(0, 0, 0, 0);
+    }
+
+
+`
