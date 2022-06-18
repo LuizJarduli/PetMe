@@ -142,7 +142,19 @@ export const RightMenuContent = styled.div`
     }
 
     @media (max-width: 540px) {
-        display: none;
+        margin-top: 40px;
+        
+        > ul {
+
+        }
+    
+        > ul > li {
+
+        }
+    
+        > ul > li > button > img {
+            
+        }
     }
 `
 
@@ -165,6 +177,14 @@ export const LeftMenuContent = styled.div`
         margin-left: 15px;
         margin-bottom: 80px;
         opacity: 0.7;
+    }
+
+    @media (max-width: 540px){
+        >p{
+            margin-top: 15px;
+            margin-left: 0px;
+            font-size: calc(20px/1.2);
+        }
     }
 
 `;

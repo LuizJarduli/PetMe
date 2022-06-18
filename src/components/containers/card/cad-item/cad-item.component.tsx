@@ -26,7 +26,7 @@ export class CadItemComponent extends Component{
 
                     <CadItemFeet>
                         <LeftMenuContent>
-                            <p>Contato:</p>
+                            <p>Contato: (xx)xxxxx-xxxx</p>
                         </LeftMenuContent>
                         <RightMenuContent>
                             <ul>
