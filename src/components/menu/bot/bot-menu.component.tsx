@@ -33,7 +33,7 @@ export class BotMenuComponent extends Component {
                 <MenuContent>
                     <ul>
                         <li><button onClick={() => this.handleNavigate('home')}><img src="../../assets/icons/Vectorhome.png" alt="Home" /></button></li>
-                        <li><button onClick={() => this.handleNavigate('cadastrar-pet')}><img src="../../assets/icons/Vectoradd.png" alt="adicionar pet" /></button></li>
+                        <li><button onClick={() => this.handleNavigate('cadastro-pet')}><img src="../../assets/icons/Vectoradd.png" alt="adicionar pet" /></button></li>
                         <li><button onClick={() => this.handleNavigate('chat')}><img src="../../assets/icons/Vectorchat.png" alt="chat" /></button></li>
                         <li><button onClick={() => this.handleNavigate('meu-perfil')}><img src="../../assets/icons/Vectormyprofile.png" alt="meu perfil" /></button></li>
                     </ul>
