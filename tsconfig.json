@@ -20,5 +20,5 @@
         "strictPropertyInitialization": false,
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "build"] // *** The files to not type check ***
+    "exclude": ["node_modules", "build", "src/**/*.js", "src/**/*.jsx"] // *** The files to not type check ***
 }

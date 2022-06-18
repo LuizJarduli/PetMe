@@ -11,6 +11,11 @@ module.exports = {
         react: {
             version: 'detect',
         },
+        'import/resolver': {
+            'node': {
+                'extensions': ['.js', '.ts', '.d.ts', '.tsx', '.jsx']
+            }
+          }
     },
     extends: [
         'plugin:react/recommended',
