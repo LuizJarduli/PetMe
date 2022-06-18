@@ -1,18 +1,29 @@
 import { Component } from 'react';
 import { IUserPropertiesModel } from '../../../../core/api/cadastro/cadastro.api.properties';
-import { FeedItemContainer } from './style';
+import { FeedItemBody, FeedItemContainer, FeedItemFooter, FeedItemHeader, FeedItemHeaderUser } from './style';
 
-export class FeedItemComponent extends Component<{ idPet: number; nome: string}, IUserPropertiesModel> {
-    constructor(props: { idPet: number; nome: string} & IUserPropertiesModel) {
+export class FeedItemComponent extends Component<any> {
+    constructor(props: any) {
         super(props);
     }
 
     render(): JSX.Element {
+        const pet = this.props?.item;
+        const { fotoPerfil, email, username } = this.props.item?.usuario;
         return (
             <FeedItemContainer>
-                <FeedItemHeader></FeedItemHeader>
-                <FeedItemBody></FeedItemBody>
-                <FeedItemFooter></FeedItemFooter>
+                <FeedItemHeader>
+                    <FeedItemHeaderUser>
+                        <img src={fotoPerfil || '../../../assets/default/pet5.jpg'} alt="" />
+                        <p>{username}</p>
+                    </FeedItemHeaderUser>
+                </FeedItemHeader>
+                <FeedItemBody>
+                    <img src={pet.fotoPet || '../../../assets/default/pet1.jpg'} alt="" />
+                </FeedItemBody>
+                <FeedItemFooter>
+                    
+                </FeedItemFooter>
             </FeedItemContainer>
         )
     }

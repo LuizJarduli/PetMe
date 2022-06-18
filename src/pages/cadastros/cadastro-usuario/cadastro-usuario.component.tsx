@@ -12,7 +12,6 @@ import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.pr
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
 import { Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import CropperComponent from '../../../components/form/inputs/file-cropped-input/file-cropper-input.component';
 import { FileInputComponent } from '../../../components/form/inputs/file-cropped-input/file-input.component';
 
 /**

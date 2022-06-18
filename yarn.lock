@@ -1387,6 +1387,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-sticky-box@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@types/react-sticky-box/-/react-sticky-box-0.8.0.tgz#bd6068e6cd9d161774854349f7ee3bd6cd9607d0"
+  integrity sha512-bkAkKBlwAXJNoEyxjwe2bZ0eHJBPKSb037IQltGpc6YhVrfDZzfmTQ/FQyuWhDXQuUMWvwZNWWR6gRyUP2Zxxg==
+  dependencies:
+    react-sticky-box "*"
+
 "@types/react-transition-group@^4.4.4":
   version "4.4.4"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-4.4.4.tgz#acd4cceaa2be6b757db61ed7b432e103242d163e"
@@ -4566,6 +4573,13 @@ react-router@6.2.2:
   integrity sha512-/MbxyLzd7Q7amp4gDOGaYvXwhEojkJD5BtExkuKmj39VEE0m3l/zipf6h2WIB2jyAO0lI6NGETh4RDcktRm4AQ==
   dependencies:
     history "^5.2.0"
+
+react-sticky-box@*:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-sticky-box/-/react-sticky-box-1.0.2.tgz#7e72a0f237bdf8270cec9254337f49519a411174"
+  integrity sha512-Kyvtppdtv1KqJyNU4DtrSMI0unyQRgtraZvVQ0GAazVbYiTsIVpyhpr+5R0Aavzu4uJNSe1awj2rk/qI7i6Zfw==
+  dependencies:
+    resize-observer-polyfill "^1.5.1"
 
 react-sticky-box@^1.0.1:
   version "1.0.1"
