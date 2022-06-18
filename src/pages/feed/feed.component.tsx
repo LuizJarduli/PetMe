@@ -49,7 +49,9 @@ export class FeedPageComponent extends Component {
                                 }
                             </StickyBox>
                         </div>
-                        <div className='col-sm-4'></div>
+                        <div className='col-sm-4'>
+                            
+                        </div>
                     </div>
                 </FeedWrapper>
                 { this.state?.redirect && <Navigate to={this.state.redirect} />}

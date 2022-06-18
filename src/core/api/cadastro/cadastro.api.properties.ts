@@ -15,5 +15,5 @@ export interface IUserPetPropertiesModel {
     estado: string;
     cidade: string;
     descricao: string;
-    imagens: string[];
+    fotoPet: string[];
 }

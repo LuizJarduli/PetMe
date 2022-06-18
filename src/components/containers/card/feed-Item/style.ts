@@ -60,3 +60,24 @@ export const FeedItemHeaderUser = styled.div`
         margin: 0 0 0 15px;
     }
 `;
+
+export const LikeContainer = styled.div`
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin: 0 0 0 15px;
+    padding: 2px 0 2px 0;
+    height: 2rem;
+
+    > button {
+        margin: 0 10px 0px 10px;
+        padding: 0;
+    }
+
+    > p {
+        font-family: 'Noto Sans', 'Roboto' sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin: 0 0 0 15px;
+    }
+`;
