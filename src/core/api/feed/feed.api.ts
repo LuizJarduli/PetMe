@@ -13,9 +13,9 @@ export class FeedApi {
      *
      * @param params 
      */
-    public static getList(params: any = {}): Promise<any> {
+    public static getList(params: string = ''): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            ApiService.getInstance().setMethod('GET').call('http://localhost:8080/usuarios/pets', params)
+            ApiService.getInstance().setMethod('GET').call(`http://localhost:8080/usuarios/pets/${params}`)
                 .then((response: any) => resolve(response))
                 .catch((error: any) => reject(error));
         });

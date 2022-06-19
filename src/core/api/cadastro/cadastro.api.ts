@@ -21,7 +21,7 @@ export class userApi {
     }
 
     /**
-     * Efetua o Login na API do sistema
+     * Recupera o usuário pelo username
      *
      * @param params 
      */
@@ -29,6 +29,22 @@ export class userApi {
         return new Promise<IUserPropertiesModel>((resolve, reject) => {
             ApiService.getInstance().setMethod('GET').call(`http://localhost:8080/usuarios/${userName}`)
                 .then((response: IUserPropertiesModel) => resolve(response))
+                .catch((error: any) => reject(error));
+        });
+    }
+
+     /**
+      * Recupera todos os usuários
+      *
+      * @param params 
+      */
+      public static getAll(): Promise<IUserPropertiesModel[]> {
+        return new Promise<IUserPropertiesModel[]>((resolve, reject) => {
+            ApiService.getInstance().setMethod('GET').call('http://localhost:8080/usuarios')
+                .then((response: IUserPropertiesModel[]) => {
+                    const maxOfFive: boolean = response?.length > 5;
+                    resolve( maxOfFive ? response.slice(-5) : response);
+                })
                 .catch((error: any) => reject(error));
         });
     }

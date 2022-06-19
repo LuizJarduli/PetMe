@@ -5,7 +5,7 @@ export const FeedItemContainer = styled.div`
     padding: 0;
     border-radius: 5px;
     border: 1px solid #CCC;
-    width: 760px;
+    width: 100%;
     height: 705px;
 `
 
@@ -52,6 +52,7 @@ export const FeedItemHeaderUser = styled.div`
         width: 4rem;
         border-radius: 50%;
         border: 1px solid #CCC;
+        object-fit: cover;
     }
 
     > p {

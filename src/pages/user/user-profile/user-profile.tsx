@@ -33,7 +33,6 @@ export class UserProfilePageComponent extends Component {
         const { username, token } = StorageService.getInstance().getUser();
         const path: string[] = window.location.href?.split('/');
         this.verifyAccessToThePage(path, username);
-        // this.getUserData(username); // Organizar service para recuperar id do user logado
     }
 
     /**
