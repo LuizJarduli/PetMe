@@ -11,7 +11,7 @@ export const CadItemContainer = styled.div`
     margin-left: 2em;
 
     @media (max-width: 540px) {
-        width: 100%;
+        width: 100vw;
         flex-direction: column;
         margin-left: 0px;
         height: 490px;
@@ -41,13 +41,12 @@ export const CadItemBody = styled.div`
     opacity: 0.6;
 
     > ul{
-        width: 90px;
-        height: 90px;
+        width: 100%px;
+        height: 100%px;
         display: block;
         margin: auto;
         opacity: 1;
-        border-radius: 50%;
-        border: 2px solid #CCC;
+        border: 0px solid #CCC;
     }
 
     > ul > p{
@@ -183,7 +182,7 @@ export const LeftMenuContent = styled.div`
         >p{
             margin-top: 15px;
             margin-left: 0px;
-            font-size: calc(20px/1.2);
+            font-size: calc(20px/1.3);
         }
     }
 

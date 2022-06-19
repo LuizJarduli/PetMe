@@ -1,26 +1,33 @@
 import styled from 'styled-components';
 
 export const FeedItemContainer = styled.div`
-    margin: 4.5rem 4rem 0 0;
+    margin: 4.5rem 4rem 4.5rem 4.5rem;
     padding: 0;
     border-radius: 5px;
     border: 1px solid #CCC;
-    width: 760px;
-    height: 705px;
+    width: 610px;
+    height: 690px;
+
+    @media (max-width: 540){
+        width: 100%;
+    }
 `
 
 export const FeedItemHeader = styled.div`
-    height: 90.33px;
+    height: 12%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: #FFFFFF;
     border: 1px solid rgba(142, 142, 142, 0.8);
     border-radius: 5px 5px 0px 0px;
+
 `;
 
 export const FeedItemBody = styled.div`
-    height: 443.82px;
+    height: 62%;
+    width: 100%;
 
     :hover {
         cursor: pointer;
@@ -31,12 +38,19 @@ export const FeedItemBody = styled.div`
         height: 100%;
         object-fit: cover;
     }
+
+
 `;
 
 export const FeedItemFooter = styled.div`
-    height: 170.85px;
+    height: 26%;
+    width: 100%;
     border: 1px solid rgba(142, 142, 142, 0.8);
     border-radius: 0px 0px 5px 5px;
+
+    @media (max-width: 540){
+        width: 100%;
+    }
 `;
 
 export const FeedItemHeaderUser = styled.div`

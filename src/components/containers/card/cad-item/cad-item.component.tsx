@@ -1,6 +1,9 @@
 import { Component } from 'react';
+import { FormComponent } from '../../../form/form.component';
+import { FileInputComponent } from '../../../form/inputs/file-cropped-input/file-input.component';
 import { CadItemContainer, CadItemHeader, CadItemBody, CadItemFeet, UserProfile,
         RightMenuContent, LeftMenuContent} from './style';
+
 
 export class CadItemComponent extends Component{
     constructor(props:Component) {
@@ -20,8 +23,12 @@ export class CadItemComponent extends Component{
 
                     <CadItemBody>
                         <ul>
-                            <p><span></span></p>
-                        </ul>
+                            <FormComponent onFormSubmit={(event) => console.log(event.detail)}>
+                                
+                                <FileInputComponent name='fotoPet'/>
+                                
+                            </FormComponent>
+                        </ul>    
                     </CadItemBody>
 
                     <CadItemFeet>

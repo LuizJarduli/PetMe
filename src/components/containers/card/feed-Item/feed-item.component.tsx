@@ -94,7 +94,7 @@ export class FeedItemComponent extends Component<any> {
                     </FeedItemHeaderUser>
                 </FeedItemHeader>
                 <FeedItemBody>
-                    <img src={fotoPet || '../../../assets/default/pet1.jpg'} alt="" />
+                    <img src={fotoPet || '../../../assets/default/pet2.jpg'} alt="" />
                 </FeedItemBody>
                 <FeedItemFooter>
                     <LikeContainer>

@@ -16,4 +16,8 @@ export const FeedWrapper = styled.div`
     > div.row > div.col-sm-4 {
         
     }
+
+    @media (max-width: 540px) {
+        width: 100%;
+    }
 `;

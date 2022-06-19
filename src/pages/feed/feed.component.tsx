@@ -4,10 +4,12 @@ import { FeedItemComponent } from '../../components/containers/card/feed-Item/fe
 import { TopMenuComponent } from '../../components/menu/top/top-menu.component';
 import { LoadingComponent } from '../../components/utility-components/loading.component';
 import { IUserPropertiesModel } from '../../core/api/cadastro/cadastro.api.properties';
-import { FeedWrapper } from './style';
+import { FeedWrapper} from './style';
 import StickyBox from 'react-sticky-box';
 import { FeedApi } from '../../core/api/feed/feed.api';
 import { toast } from 'react-toastify';
+import { BotMenuComponent } from '../../components/menu/bot/bot-menu.component';
+import { CardComponent } from '../../components/containers/card/card.component';
 
 export class FeedPageComponent extends Component {
     constructor(props: Component) {
@@ -34,28 +36,33 @@ export class FeedPageComponent extends Component {
 
         return (
             <>
-                <FeedWrapper>
-                    <TopMenuComponent />
+                <TopMenuComponent />
+                    <FeedWrapper>
+                        <div className='row'>
+                            <div className='col-sm-8'>
+                                <StickyBox>
+                                    {
+                                        pets.map((pet, index) => {
+                                            return (
+                                                <FeedItemComponent item={pet} key={index}/>
+                                            )
+                                        })
+                                    }
+                                </StickyBox>
+                            </div>
+                            <div className='col-sm-4'>
+                                
+                            </div>
+                        </div>   
+                
+                    </FeedWrapper>
+                    { this.state?.redirect && <Navigate to={this.state.redirect} />}
+                    { loading && (<LoadingComponent></LoadingComponent>) }
 
-                    <div className='row'>
-                        <div className='col-sm-8'>
-                            <StickyBox>
-                                {
-                                    pets.map((pet, index) => {
-                                        return (
-                                            <FeedItemComponent item={pet} key={index}/>
-                                        )
-                                    })
-                                }
-                            </StickyBox>
-                        </div>
-                        <div className='col-sm-4'>
-                            
-                        </div>
-                    </div>
-                </FeedWrapper>
-                { this.state?.redirect && <Navigate to={this.state.redirect} />}
-                { loading && (<LoadingComponent></LoadingComponent>) }
+                    <CardComponent shadow size='sm'>AAAAAAAA</CardComponent>
+ 
+                <BotMenuComponent></BotMenuComponent>
+
             </>
         )
     }
