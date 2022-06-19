@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { CadItemContainer, CadItemHeader, CadItemBody, CadItemFeet} from './style';
+import { CadItemContainer, CadItemHeader, CadItemBody, CadItemFeet, UserProfile,
+        RightMenuContent, LeftMenuContent} from './style';
 
 export class CadItemComponent extends Component{
     constructor(props:Component) {
@@ -8,19 +9,38 @@ export class CadItemComponent extends Component{
 
     render(): JSX.Element {
         return (
-            <CadItemContainer>
+            <>
+                <CadItemContainer>
+            
+                    <CadItemHeader>
+                        <UserProfile>
+                            <img src='../../../assets/default/default-profile.png' alt="Imagem de Perfil"/>
+                        </UserProfile>
+                    </CadItemHeader>
 
-                <CadItemHeader>
-                </CadItemHeader>
+                    <CadItemBody>
+                        <ul>
+                            <p><span></span></p>
+                        </ul>
+                    </CadItemBody>
 
-                <CadItemBody>
-                    <img src="../../assets/icons/Vectoradd.png" alt="Logo"></img>
-                </CadItemBody>
+                    <CadItemFeet>
+                        <LeftMenuContent>
+                            <p>Contato: (xx)xxxxx-xxxx</p>
+                        </LeftMenuContent>
+                        <RightMenuContent>
+                            <ul>
+                                <li><button><img src="../../assets/icons/facebook.png" alt="Facebook" /></button></li>
+                                <li><button><img src="../../assets/icons/instagram.png" alt="Instagram" /></button></li>
+                                <li><button><img src="../../assets/icons/whatsapp.png" alt="whatsapp" /></button></li>
+                            </ul>
+                        </RightMenuContent>
+                    </CadItemFeet>
 
-                <CadItemFeet>
-                </CadItemFeet>
+                </CadItemContainer>
+            
+            </>
 
-            </CadItemContainer>
         )
     }
 }

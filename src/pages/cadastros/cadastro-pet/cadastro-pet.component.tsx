@@ -4,7 +4,8 @@ import { FormComponent } from '../../../components/form/form.component';
 import { ButtonComponent } from '../../../components/buttons/button.component';
 import { PhoneInputComponent } from '../../../components/form/inputs/phone-input/phone-input.component';
 import { TextInputComponent } from '../../../components/form/inputs/text-input/text-input.component';
-import { Column, Container } from './style';
+import { DescInputComponent } from '../../../components/form/inputs/desc-input/desc-input.component';
+import { Column, Container, Aux } from './style';
 import { TopMenuComponent } from '../../../components/menu/top/top-menu.component';
 import { BotMenuComponent } from '../../../components/menu/bot/bot-menu.component';
 import { CadItemComponent } from '../../../components/containers/card/cad-item/cad-item.component';
@@ -69,10 +70,10 @@ export class CadastroPetComponent extends Component {
         return(
             <>
                 <TopMenuComponent/>
+                <Aux></Aux>
                 <Container>
                     { this.state?.loading && (<LoadingComponent></LoadingComponent>) }
                     { this.state?.redirect && <Navigate to={this.state.redirect} />}
-                    
                     <Column>
                         <CadItemComponent>
                         </CadItemComponent>
@@ -86,7 +87,7 @@ export class CadastroPetComponent extends Component {
                                     placeholder='Nome do Maskote'
                                     validate='required' />
 
-                                <TextInputComponent 
+                                <DescInputComponent 
                                     name='descricao'
                                     placeholder='Descrição'
                                     validate='required' />
@@ -116,6 +117,7 @@ export class CadastroPetComponent extends Component {
                     </Column>
                 </Container>
                 <BotMenuComponent/>
+                <Aux></Aux>
             </>
 
         );
