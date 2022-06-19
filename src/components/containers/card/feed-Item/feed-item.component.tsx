@@ -1,15 +1,10 @@
 import { Component } from 'react';
 import { IUserPropertiesModel } from '../../../../core/api/cadastro/cadastro.api.properties';
-import { FeedItemBody, FeedItemContainer, FeedItemFooter, FeedItemHeader, FeedItemHeaderUser, LikeContainer } from './style';
+import { DescriptionContainer, FeedItemBody, FeedItemContainer, FeedItemFooter, FeedItemHeader, FeedItemHeaderUser, LikeContainer, PetName } from './style';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    IconLookup,
-    IconDefinition,
-    findIconDefinition,
-    library
-} from '@fortawesome/fontawesome-svg-core'
+import { IconLookup, IconDefinition, findIconDefinition, library } from '@fortawesome/fontawesome-svg-core';
 import { StorageService } from '../../../../core/services/storageService';
 import { userApi } from '../../../../core/api/cadastro/cadastro.api';
 import { FeedApi } from '../../../../core/api/feed/feed.api';
@@ -28,7 +23,15 @@ export class FeedItemComponent extends Component<any> {
     /** Dados do usuário logado */
     private logged: IUserPropertiesModel =  StorageService.getInstance().getUser();
     /** State do componente */
-    state: { alreadyLiked: boolean; redirect: string; };
+    state: { alreadyLiked: boolean; redirect: string; numberOfLikes: number; };
+
+    /**
+     * Verifica se o usuário logado possui curtida registrada no pet
+     * @param likes array de likes do pet
+     */
+    private verifyLike(likes: any[]): boolean {
+        return likes?.find((item) => item.usuario?.username === this.logged.username) !== undefined;
+    }
 
     /**
      * Efetua o like ou deslike do pet
@@ -38,9 +41,10 @@ export class FeedItemComponent extends Component<any> {
     private async handleLikeClick(idPet: number, userName: string): Promise<void> {
         const idUsuario: number = (await userApi.get(userName))?.idUsuario;
         FeedApi.like(idPet, idUsuario)
-            .then(() => {
-                this.setState({ alreadyLiked: true}) // MOCK temporário até existir get por id do pet
-                toast.success('Pet Curtido!');
+            .then((response) => {
+                const likes: any[] = response?.curtidas;
+                const liked: boolean = this.verifyLike(likes);
+                this.setState({ alreadyLiked: liked, numberOfLikes: response?.quantidadeCurtidas });
             })
             .catch((error) => toast.error(error)) 
     }
@@ -50,7 +54,7 @@ export class FeedItemComponent extends Component<any> {
      */
     componentDidMount(): void {
         const likes: any[] = this.props?.item?.curtidas;
-        const liked: boolean = likes?.find((item) => item.usuario?.username === this.logged.username);
+        const liked: boolean = this.verifyLike(likes);
         this.setState({ alreadyLiked: liked })
     }
     
@@ -60,11 +64,20 @@ export class FeedItemComponent extends Component<any> {
     render(): JSX.Element {
         library.add(fas, far)
 
+        /**
+         * Buscando ícones
+         */
         const heartLookup: IconLookup = { prefix: 'fas', iconName: 'heart' };
+        const phoneLookup: IconLookup = { prefix: 'fas', iconName: 'phone' };
         const heartLightLookup: IconLookup = { prefix: 'far', iconName: 'heart' };
+        const emailLookup: IconLookup = { prefix: 'far', iconName: 'envelope' };
+        const emailDefinition: IconDefinition = findIconDefinition(emailLookup);
+        const phoneDefinition: IconDefinition = findIconDefinition(phoneLookup);
         const heartDefinition: IconDefinition = findIconDefinition(heartLookup);
         const heartLightDefinition: IconDefinition = findIconDefinition(heartLightLookup);
-        const { alreadyLiked } = this.state || {};
+
+        /** Dados necessários para renderização do pet */
+        const { alreadyLiked, numberOfLikes } = this.state || {};
         const { username: userLogged } = StorageService.getInstance().getUser();
         const { 
             fotoPet,
@@ -94,17 +107,27 @@ export class FeedItemComponent extends Component<any> {
                     </FeedItemHeaderUser>
                 </FeedItemHeader>
                 <FeedItemBody>
-                    <img src={fotoPet || '../../../assets/default/pet1.jpg'} alt="" />
+                    <img src={fotoPet || '../../../assets/default/pet4.jpg'} alt="" />
                 </FeedItemBody>
                 <FeedItemFooter>
+                    <PetName>
+                        <p><span>{nome}</span> - {cidade}, {estado}</p>
+                        <div>
+                            <FontAwesomeIcon icon={phoneDefinition} title={numero} className="user--contact"/>
+                            <FontAwesomeIcon icon={emailDefinition} title={email} className="user--contact"/>
+                        </div>
+                    </PetName>
                     <LikeContainer>
                         <button 
                             type='button'
-                            onClick={() => this.handleLikeClick(idPet, userLogged)}>
+                            onClick={() => setTimeout(() => this.handleLikeClick(idPet, userLogged))}>
                                 <FontAwesomeIcon icon={ alreadyLiked ? heartDefinition : heartLightDefinition } />
                         </button>
-                        <p>{quantidadeCurtidas}&nbsp;&nbsp;Curtidas</p>
+                        <p>{numberOfLikes || quantidadeCurtidas}&nbsp;&nbsp;Curtidas</p>
                     </LikeContainer>
+                    <DescriptionContainer>
+                        <p>{descricao}</p>
+                    </DescriptionContainer>
                 </FeedItemFooter>
             </FeedItemContainer>
         )
