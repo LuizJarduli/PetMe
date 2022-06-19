@@ -25,7 +25,8 @@ export class EmailInputComponent extends Input{
                 alt={this.props.alt}
                 readOnly={this.props.readonly}
                 onChange={event => this.context.setFields(event, this.field)}
-                onKeyUp={() => this.validateInput()}/>
+                onKeyUp={() => this.validateInput()}
+                defaultValue={this.props.value}/>
         )
     }
 

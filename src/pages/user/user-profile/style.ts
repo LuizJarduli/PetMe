@@ -30,7 +30,40 @@ export const UserProfilePicture = styled.div`
 `;
 
 export const UserProfileData = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 500px;
+    height: 100%;
     padding: 10px;
+    margin: 2rem 0 0 0;
+
+    > h3 {
+        margin: 0 20px 0 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    > .buttons--container{
+        display: flex;
+        flex: direction: row;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    > .buttons--container > .buttons--margin {
+        margin: 0 15px 0 0;
+    }
+
+    > p {
+        font-family: 'Noto Sans', 'Roboto', sans-serif;
+        font-size: 17px;
+    }
+
+    > p > span {
+        font-weight: bold;
+    }
 `;
 
 export const UserPetsList = styled.div`

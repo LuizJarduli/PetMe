@@ -71,6 +71,7 @@ export class Input extends Component<IInputProperties> {
     protected getInput(): ReactNode {
         return(
             <input
+                className={this.props.readonly ? 'readonly' : ''}
                 ref={this.input}
                 name={this.props.name}
                 id={'input-' + this.props.name}
@@ -78,7 +79,8 @@ export class Input extends Component<IInputProperties> {
                 alt={this.props.alt}
                 readOnly={this.props.readonly}
                 onChange={event => this.context.setFields(event, this.field)}
-                onKeyUp={() => this.validateInput()}/>
+                onKeyUp={() => this.validateInput()}
+                defaultValue={this.props?.value}/>
         )
     }
 

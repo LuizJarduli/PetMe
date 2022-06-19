@@ -76,7 +76,8 @@ export class CPFInputComponent extends Input {
                 ref={this.input}
                 onChange={event => this.context.setFields(event, this.field)}
                 onKeyUp={() => this.validateInput()}
-                mask={'999.999.999-99'}/>
+                mask={'999.999.999-99'}
+                defaultValue={this.props.value}/>
         )
     }
 }

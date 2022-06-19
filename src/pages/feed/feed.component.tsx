@@ -55,7 +55,7 @@ export class FeedPageComponent extends Component {
      */
     componentDidMount(): void {
         this.setState({ loading: true });
-        const { username, token } = StorageService.getInstance().getUser();
+        const { username, token } = StorageService.getInstance().getUser() || {};
 
         Promise.all([
             userApi.get(username),
