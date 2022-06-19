@@ -21,6 +21,7 @@ export function AppRoutes(): JSX.Element {
                 <Route path='cadastro'      element={<CadastroUsuarioComponent />}></Route>
                 <Route path='recuperar'     element={<RecuperarSenhaComponent />}></Route>
                 <Route path='meu-perfil'    element={<UserProfilePageComponent />}></Route>
+                <Route path='perfil/*'      element={<UserProfilePageComponent />}></Route>
                 <Route path='home'          element={<FeedPageComponent />}></Route>
                 <Route path='cadastro-pet'  element={<CadastroPetComponent />}></Route>
                 <Route path='*' element={<NoPageComponent />}></Route>

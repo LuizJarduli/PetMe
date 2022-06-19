@@ -5,7 +5,7 @@ export const FeedItemContainer = styled.div`
     padding: 0;
     border-radius: 5px;
     border: 1px solid #CCC;
-    width: 760px;
+    width: 100%;
     height: 705px;
 `
 
@@ -19,8 +19,9 @@ export const FeedItemHeader = styled.div`
     border-radius: 5px 5px 0px 0px;
 `;
 
-export const FeedItemBody = styled.div`
+export const FeedItemBody = styled.button`
     height: 443.82px;
+    width: 100%;
 
     :hover {
         cursor: pointer;
@@ -51,9 +52,12 @@ export const FeedItemHeaderUser = styled.div`
         width: 4rem;
         border-radius: 50%;
         border: 1px solid #CCC;
+        object-fit: cover;
     }
 
     > p {
+        white-space: nowrap;
+        overflow: hidden;
         font-family: 'Noto Sans', 'Roboto' sans-serif;
         font-size: 20px;
         font-weight: bold;
@@ -70,7 +74,7 @@ export const LikeContainer = styled.div`
     height: 2rem;
 
     > button {
-        margin: 0 10px 0px 10px;
+        margin: 0;
         padding: 0;
     }
 
@@ -79,5 +83,49 @@ export const LikeContainer = styled.div`
         font-size: 15px;
         font-weight: bold;
         margin: 0 0 0 15px;
+    }
+`;
+
+export const PetName = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.5rem 0 0.5rem 0;
+    padding: 0;
+
+    > p {
+        white-space: nowrap;
+        overflow: hidden;
+        font-family: 'Noto Sans', 'Roboto' sans-serif;
+        font-size: 15px;
+        font-weight: normal;
+        margin: 0 0 0 15px;
+    }
+
+    > p > span {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    > div {
+        margin: 0 15px 0 0;
+    }
+
+    > div > .user--contact:first-child {
+        margin-right: 15px;
+    }   
+`;
+
+export const DescriptionContainer = styled.div`
+    margin: 0.5rem 0 0.5rem 0;
+    padding: 0;
+
+    > p {
+        font-family: 'Noto Sans', 'Roboto' sans-serif;
+        font-size: 15px;
+        font-weight: normal;
+        margin: 0 0 0 15px;
+        white-space: nowrap;
+        overflow: hidden;
     }
 `;

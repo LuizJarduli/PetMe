@@ -4,6 +4,8 @@ export interface IUserPropertiesModel {
     idUsuario: number;
     senha: string;
     username: string;
+    cidade: string;
+    estado: string;
     pets: IUserPetPropertiesModel[];
     fotoPerfil: string;
 }

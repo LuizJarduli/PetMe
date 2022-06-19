@@ -26,6 +26,7 @@ export default createGlobalStyle`
         --padding-xl: 32px;
         --button-primary: #75AA62;
         --button-secondary: #636363;
+        --button-red: #EB312A;
     }
 
     /* Firefox */
@@ -77,6 +78,10 @@ export default createGlobalStyle`
     body {
         background-color: var(--primary);
         /* Works on Firefox */
+    }
+
+    .readonly {
+        background-color: #DDD;
     }
     
 `
