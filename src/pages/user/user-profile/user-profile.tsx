@@ -20,17 +20,31 @@ export class UserProfilePageComponent extends Component {
             loading: false,
             userData: null,
             activeComponent: false,
+            isUserLogged: false,
         }
     }
 
-    state: { loading: boolean; redirect?: string; userData: IUserPropertiesModel | null; activeComponent: boolean };
+    state: { loading: boolean; redirect?: string; userData: IUserPropertiesModel | null; activeComponent: boolean, isUserLogged: boolean};
 
     /**
      * Chamado imediatamente após a montagem do componente.
      */
     componentDidMount(): void {
         const { username, token } = StorageService.getInstance().getUser();
-        this.getUserData(username); // Organizar service para recuperar id do user logado
+        const path: string[] = window.location.href?.split('/');
+        this.verifyAccessToThePage(path, username);
+        // this.getUserData(username); // Organizar service para recuperar id do user logado
+    }
+
+    /**
+     * Verifica o acesso na página, se é pra visualizar o perfil próprio do usuário ou algum outro para consulta
+     * @param path array com os paths dessa tela
+     * @param loggedUser usuário logado
+     */
+    private verifyAccessToThePage(path: string[], loggedUser: string): void {
+        const lastIndex: number = path.length - 1;
+        const pathAccess: string = path[lastIndex] === loggedUser || path[lastIndex] === 'meu-perfil' ? loggedUser : path[lastIndex];
+        this.getUserData(pathAccess);
     }
 
     /**
@@ -44,7 +58,9 @@ export class UserProfilePageComponent extends Component {
             .then((response: IUserPropertiesModel) => {
                 this.setState({ userData: response});
             })
-            .catch((error) => toast.error(error))
+            .catch((error) => {
+                toast.error(error);
+            })
             .finally(() => this.setState({ loading: false, activeComponent: true }));
     }
 

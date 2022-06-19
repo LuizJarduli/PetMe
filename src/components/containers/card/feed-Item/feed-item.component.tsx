@@ -9,6 +9,7 @@ import { StorageService } from '../../../../core/services/storageService';
 import { userApi } from '../../../../core/api/cadastro/cadastro.api';
 import { FeedApi } from '../../../../core/api/feed/feed.api';
 import { toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom';
 
 /**
  * Componente de item do feed do sistema
@@ -24,6 +25,14 @@ export class FeedItemComponent extends Component<any> {
     private logged: IUserPropertiesModel =  StorageService.getInstance().getUser();
     /** State do componente */
     state: { alreadyLiked: boolean; redirect: string; numberOfLikes: number; };
+
+    /**
+     * Trata os redirecionamentos da página com a rota informada
+     * @param route rota a ser redirecionada
+     */
+    private handleRedirect(route: string): void {
+        this.setState({ redirect: route });
+    }
 
     /**
      * Verifica se o usuário logado possui curtida registrada no pet
@@ -77,7 +86,7 @@ export class FeedItemComponent extends Component<any> {
         const heartLightDefinition: IconDefinition = findIconDefinition(heartLightLookup);
 
         /** Dados necessários para renderização do pet */
-        const { alreadyLiked, numberOfLikes } = this.state || {};
+        const { alreadyLiked, numberOfLikes, redirect } = this.state || {};
         const { username: userLogged } = StorageService.getInstance().getUser();
         const { 
             fotoPet,
@@ -106,8 +115,9 @@ export class FeedItemComponent extends Component<any> {
                         <p>{username}</p>
                     </FeedItemHeaderUser>
                 </FeedItemHeader>
-                <FeedItemBody>
-                    <img src={fotoPet || '../../../assets/default/pet4.jpg'} alt="" />
+                <FeedItemBody
+                    onClick={() => this.handleRedirect(`/perfil/${username}`)}>
+                        <img src={fotoPet || '../../../assets/default/pet4.jpg'} alt=""/>
                 </FeedItemBody>
                 <FeedItemFooter>
                     <PetName>
@@ -129,6 +139,7 @@ export class FeedItemComponent extends Component<any> {
                         <p>{descricao}</p>
                     </DescriptionContainer>
                 </FeedItemFooter>
+                { redirect && <Navigate to={redirect} />}
             </FeedItemContainer>
         )
     }

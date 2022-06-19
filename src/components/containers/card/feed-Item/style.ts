@@ -19,8 +19,9 @@ export const FeedItemHeader = styled.div`
     border-radius: 5px 5px 0px 0px;
 `;
 
-export const FeedItemBody = styled.div`
+export const FeedItemBody = styled.button`
     height: 443.82px;
+    width: 100%;
 
     :hover {
         cursor: pointer;
