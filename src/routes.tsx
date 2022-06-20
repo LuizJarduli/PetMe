@@ -6,6 +6,7 @@ import { FeedPageComponent } from './pages/feed/feed.component';
 import { NoPageComponent } from './pages/no-page/no-page.component';
 import { UserProfilePageComponent } from './pages/user/user-profile/user-profile';
 import { CadastroPetComponent } from './pages/cadastros/cadastro-pet/cadastro-pet.component';
+import { WebChatComponent } from './pages/webchat/webchat.component';
 
 /**
  * Todas as rotas do projeto passarão por aqui
@@ -24,6 +25,7 @@ export function AppRoutes(): JSX.Element {
                 <Route path='perfil/*'      element={<UserProfilePageComponent />}></Route>
                 <Route path='home'          element={<FeedPageComponent />}></Route>
                 <Route path='cadastro-pet'  element={<CadastroPetComponent />}></Route>
+                <Route path='chat/*'        element={<WebChatComponent />}></Route>
                 <Route path='*' element={<NoPageComponent />}></Route>
             </Routes>
         </Router>
