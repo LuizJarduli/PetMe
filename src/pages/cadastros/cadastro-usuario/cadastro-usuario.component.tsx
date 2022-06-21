@@ -64,6 +64,7 @@ export class CadastroUsuarioComponent extends Component {
      */
     componentWillUnmount(): void {
         document.removeEventListener('onFormSubmit', (event) => this.handleCadastroFormSubmit((event as CustomEvent).detail));
+        setTimeout(() => window.location.reload(),  500);
     }
 
     render(): JSX.Element {

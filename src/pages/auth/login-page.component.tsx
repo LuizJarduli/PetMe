@@ -72,6 +72,7 @@ export class LoginPageComponent extends Component {
      */
     componentWillUnmount(): void {
         document.removeEventListener('onFormSubmit', (event) => this.handleLoginFormSubmit((event as CustomEvent).detail));
+        setTimeout(() => window.location.reload(),  500);
     }
 
     /**
