@@ -200,6 +200,7 @@ export class UserProfilePageComponent extends Component {
      */
     componentWillUnmount(): void {
         document.removeEventListener('onFormSubmit', (event) => this.handleCadastroFormSubmit((event as CustomEvent).detail));
+        setTimeout(() => window.location.reload(),  500);
     }
 
     /**
@@ -250,7 +251,7 @@ export class UserProfilePageComponent extends Component {
                             return (
                                 <div className='col-sm-4 text-center' key={index}>
                                     <PetContainer>
-                                        <img src={`../../../assets/default/pet${index+1}.jpg`} alt="Imagem de Perfil"/>
+                                        <img src={pet.fotoPet || '../../../assets/default/pet5.jpg'} alt="Imagem de Perfil"/>
                                     </PetContainer>
                                 </div>
                             )

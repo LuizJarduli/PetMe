@@ -31,7 +31,7 @@ export class FeedItemComponent extends Component<any> {
      * @param route rota a ser redirecionada
      */
     private handleRedirect(route: string): void {
-        this.setState({ redirect: route });
+        !this.props?.preview && this.setState({ redirect: route });
     }
 
     /**
@@ -99,13 +99,13 @@ export class FeedItemComponent extends Component<any> {
             estado,
             curtidas,
             usuario,
-        } = this.props?.item;
+        } = this.props?.item || {};
 
         const { 
             fotoPerfil,
             email,
             username
-        } = usuario;
+        } = usuario || {};
 
         return (
             <FeedItemContainer>
@@ -127,14 +127,18 @@ export class FeedItemComponent extends Component<any> {
                             <FontAwesomeIcon icon={emailDefinition} title={email} className="user--contact"/>
                         </div>
                     </PetName>
-                    <LikeContainer>
-                        <button 
-                            type='button'
-                            onClick={() => setTimeout(() => this.handleLikeClick(idPet, userLogged))}>
-                                <FontAwesomeIcon icon={ alreadyLiked ? heartDefinition : heartLightDefinition } />
-                        </button>
-                        <p>{numberOfLikes || quantidadeCurtidas}&nbsp;&nbsp;Curtidas</p>
-                    </LikeContainer>
+                    {
+                        !this.props?.preview ? (
+                            <LikeContainer>
+                                <button 
+                                    type='button'
+                                    onClick={() => setTimeout(() => this.handleLikeClick(idPet, userLogged))}>
+                                        <FontAwesomeIcon icon={ alreadyLiked ? heartDefinition : heartLightDefinition } />
+                                </button>
+                                <p>{numberOfLikes || quantidadeCurtidas}&nbsp;&nbsp;Curtidas</p>
+                            </LikeContainer>
+                        ) : (<></>)
+                    }
                     <DescriptionContainer>
                         <p>{descricao}</p>
                     </DescriptionContainer>

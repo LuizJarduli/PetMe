@@ -38,7 +38,6 @@ export const CadItemBody = styled.div`
     margin: 3%;
     border-radius: 50px;
     border: 1px solid #CCC;
-    opacity: 0.6;
 
     > ul{
         width: 90px;
@@ -105,7 +104,6 @@ export const UserProfile = styled.div`
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        opacity: 0.2;
     }
 
     @media(max-width: 540px) {

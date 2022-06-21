@@ -21,6 +21,19 @@ export class userApi {
     }
 
     /**
+     * Cadastra um pet no sistema
+     * @param idUser id do usuário que será associado ao pet
+     * @param params dados do pet
+     */
+    public static createPet(idUser: number, params: any): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            ApiService.getInstance().setMethod('POST').call(`http://localhost:8080/usuarios/${idUser}/pets`, params)
+                .then((response: any) => resolve(response))
+                .catch((error: any) => reject(error));
+        })
+    }
+
+    /**
      * Recupera o usuário pelo username
      *
      * @param params payload da requisição

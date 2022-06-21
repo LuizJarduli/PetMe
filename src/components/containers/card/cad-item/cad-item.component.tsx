@@ -2,31 +2,43 @@ import { Component } from 'react';
 import { CadItemContainer, CadItemHeader, CadItemBody, CadItemFeet, UserProfile,
         RightMenuContent, LeftMenuContent} from './style';
 
-export class CadItemComponent extends Component{
-    constructor(props:Component) {
+export class CadItemComponent extends Component<any> {
+    constructor(props: Component<any>) {
         super(props);
     }
 
     render(): JSX.Element {
+        const { 
+            nome,
+            cidade,
+            descricao,
+            estado,
+            fotoPet,
+            numero,
+        } = this.props?.petData || {};
+
+        const {
+            username,
+            fotoPerfil,
+            idUsuario,
+        } = this.props?.userData || {};
+
         return (
             <>
                 <CadItemContainer>
-            
                     <CadItemHeader>
                         <UserProfile>
-                            <img src='../../../assets/default/default-profile.png' alt="Imagem de Perfil"/>
+                            <img src={ fotoPerfil || '../../../assets/default/default-profile.png'} alt="Imagem de Perfil"/>
                         </UserProfile>
                     </CadItemHeader>
-
                     <CadItemBody>
-                        <ul>
-                            <p><span></span></p>
-                        </ul>
+                        <img src={ fotoPet || '../../../assets/default/default-profile.png'} alt="Imagem do pet"/>
                     </CadItemBody>
-
                     <CadItemFeet>
                         <LeftMenuContent>
-                            <p>Contato: (xx)xxxxx-xxxx</p>
+                            <p>Contato: {numero} - {cidade}, {estado}</p>
+                            <p>{nome}</p>
+                            <p>{descricao}</p>
                         </LeftMenuContent>
                         <RightMenuContent>
                             <ul>
@@ -36,9 +48,7 @@ export class CadItemComponent extends Component{
                             </ul>
                         </RightMenuContent>
                     </CadItemFeet>
-
                 </CadItemContainer>
-            
             </>
 
         )

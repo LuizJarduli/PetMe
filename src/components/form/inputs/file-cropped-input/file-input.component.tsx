@@ -14,7 +14,7 @@ export class FileInputComponent extends Input {
         this.setFormState({ 
             submitData: { 
                 ...oldStateData,
-                fotoPerfil: { 
+                [this.props?.name]: { 
                     value: file,
                     name: this.props?.name,
                 }
