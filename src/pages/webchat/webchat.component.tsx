@@ -7,6 +7,12 @@ import { IUserPropertiesModel } from '../../core/api/cadastro/cadastro.api.prope
 import { StorageService } from '../../core/services/storageService';
 import WebChat from './webchat-config.component';
 
+/**
+ * Componente de webchat so sistema
+ * @author Luiz Miguel 
+ * @since 06/2022
+ * @see https://sendbird.com/docs/uikit/v3/react/overview
+ */
 export class WebChatComponent extends Component {
     constructor(props: Component) {
         super(props);
@@ -17,6 +23,9 @@ export class WebChatComponent extends Component {
 
     state: { loading: boolean; user?: IUserPropertiesModel; };
 
+    /**
+     * Chamado imediatamente quando o componente é inserido no DOM
+     */
     componentDidMount(): void {
         const { username, token } = StorageService.getInstance().getUser() || {};
         this.setState({ loading: true });
@@ -26,6 +35,9 @@ export class WebChatComponent extends Component {
             .finally(() => this.setState({ loading: false }))
     }
 
+    /**
+     * Renderiza os elementos da página
+     */
     render(): JSX.Element {
         const { loading, user } = this.state || {};
 
