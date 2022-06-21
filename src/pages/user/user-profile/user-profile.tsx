@@ -330,7 +330,6 @@ export class UserProfilePageComponent extends Component {
      * Retorna o modal de confirmação de doação do pet especificado
      */
      private donatePetModal(petId: number): JSX.Element {
-        console.log(petId);
         return (
             <>
                 <p>O Pet foi realmente Doado?</p>
