@@ -34,6 +34,19 @@ export class userApi {
     }
 
     /**
+     * Efetua a doação de um pet (exclusão lógica)
+     * @param idUser id do usuário 
+     * @param idPet id do pet
+     */
+    public static donatePet(idUser: number, idPet: number): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            ApiService.getInstance().setMethod('DELETE').call(`http://localhost:8080/usuarios/${idUser}/pets/${idPet}`)
+                .then((response: any) => resolve(response))
+                .catch((error: any) => reject(error));
+        })
+    }
+
+    /**
      * Recupera o usuário pelo username
      *
      * @param params payload da requisição

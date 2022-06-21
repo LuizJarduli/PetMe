@@ -36,6 +36,7 @@ export class RecuperarSenhaComponent extends Component{
      */
     componentWillUnmount(): void {
         document.removeEventListener('onFormSubmit', (event) => this.handleRecuperarFormSubmit(event));
+        setTimeout(() => window.location.reload(),  500);
     }
 
     render(): JSX.Element {
@@ -54,16 +55,13 @@ export class RecuperarSenhaComponent extends Component{
                                 placeholder='Email'
                                 validate='required'
                             />
-
                             <ButtonComponent 
                                     name='confirmButton'
                                     label='Enviar'
                                     color='primary'/>
 
                         </FormComponent>
-
                         <Separator></Separator>
-
                         <Box>
                             <ButtonComponent 
                                 name='backButton'

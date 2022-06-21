@@ -81,7 +81,6 @@ export const PetContainer = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    width: 30%;
     height: auto;
     margin-top: 2rem; 
 
@@ -100,10 +99,21 @@ export const PetContainer = styled.div`
     }
 
     @media (max-width: 540px) {
-
+        margin-top: 10rem;
         margin-bottom: 1.5em;
         > img {
             width: calc(85vw);
         }
+    }
+
+    > .pet-buttons--container {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: row;
+        width: 98%;
+    }
+
+    > .pet-buttons--container > .buttons--margin {
+        margin: 0 15px 0 0;
     }
 `;

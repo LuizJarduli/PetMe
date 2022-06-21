@@ -34,7 +34,7 @@ export class UserProfilePageComponent extends Component {
         }
     }
 
-    state: { loading: boolean; redirect?: string; userData: IUserPropertiesModel | null; activeComponent: boolean, isUserLogged: boolean, showModal: boolean, currentModal?: string};
+    state: { loading: boolean; redirect?: string; userData: IUserPropertiesModel | null; activeComponent: boolean, isUserLogged: boolean, showModal: boolean, currentModal?: string, modalParams?: any };
 
     /**
      * Chamado imediatamente após a montagem do componente.
@@ -65,8 +65,8 @@ export class UserProfilePageComponent extends Component {
      * Abre o modal especificado
      * @param action modal especificado
      */
-    private openModal(action: string): void {
-        this.setState({ showModal: true, currentModal: action});
+    private openModal(action: string, data?: any): void {
+        this.setState({ showModal: true, currentModal: action, modalParams: data});
     }
     
     /**
@@ -82,7 +82,7 @@ export class UserProfilePageComponent extends Component {
      * Recupera o modal específico para ser aberto na ação de chamada
      * @param modalToOpen modal especificado
      */
-    private recoverModal(modalToOpen: string): JSX.Element {
+    private recoverModal(modalToOpen: string, data?: any): JSX.Element {
         let element: JSX.Element = (<></>);
         switch (modalToOpen) {
             case 'edit':
@@ -91,9 +91,9 @@ export class UserProfilePageComponent extends Component {
             case 'deactivate':
                 element = this.deactivateModal();
                 break;
-            // case 'donate':
-            //     element = this.donateModal();
-            //     break;
+            case 'donatePet':
+                element = this.donatePetModal(data);
+                break;
             // case 'editPet': 
             //     element = this.editPetModal();
             //     break;
@@ -138,7 +138,7 @@ export class UserProfilePageComponent extends Component {
                 }
                 /** Executa todas as ações de edição */
                 this.setState({ loading: true });
-                Promise.all(promises)
+                promises.length > 0 && Promise.all(promises)
                     .then(() => toast.success('Senha e/ou foto de perfil atualizados com sucesso!'))
                     .catch((error) => toast.error(error))
                     .finally(() => this.setState({ loading: false }));
@@ -146,6 +146,21 @@ export class UserProfilePageComponent extends Component {
             })
             .catch((error) => toast.error(error))
             .finally(() => this.setState({ loading: false }));
+    }
+
+    /**
+     * Doa o pet especificado
+     * @param id id do pet
+     */
+    private donatePet(id: number): void {
+        this.setState({ loading: true });
+        const { idUsuario } = this.state.userData || {};
+        userApi.donatePet(idUsuario as number, id)
+            .then(() => toast.success('Seu Pet foi doado com sucesso!'))
+            .catch((error) => toast.error(error))
+            .finally(() => {
+                this.setState({ loading: false });
+            });
     }
 
     /**
@@ -207,7 +222,7 @@ export class UserProfilePageComponent extends Component {
      * Renderiza os elementos da página
      */
     render(): JSX.Element {
-        const { userData, loading, activeComponent, redirect, isUserLogged, showModal, currentModal } = this.state || {};
+        const { userData, loading, activeComponent, redirect, isUserLogged, showModal, currentModal, modalParams } = this.state || {};
         const { username, email, fotoPerfil, pets } = userData || {};
 
         return (
@@ -248,22 +263,43 @@ export class UserProfilePageComponent extends Component {
                 <UserPetsList>
                     <div className='row'>
                         { pets?.map((pet: any, index: number) => {
-                            return (
-                                <div className='col-sm-4 text-center' key={index}>
-                                    <PetContainer>
-                                        <img src={pet.fotoPet || '../../../assets/default/pet5.jpg'} alt="Imagem de Perfil"/>
-                                    </PetContainer>
-                                </div>
-                            )
+                            if (pet.ativo) {
+                                return (
+                                    <div className='col-sm-4 text-center' key={index}>
+                                        
+                                        <PetContainer>
+                                            <img src={pet.fotoPet || '../../../assets/default/pet5.jpg'} alt="Imagem de Perfil"/>
+                                            {
+                                                isUserLogged ? (
+                                                    <div className='pet-buttons--container'>
+                                                        <ButtonComponent
+                                                            className='buttons--margin'
+                                                            name='editPetProfile'
+                                                            label='Editar Pet'
+                                                            color='secondary'
+                                                            onClick={() => this.openModal('editPet', pet.idPet)}></ButtonComponent>
+                                                        <ButtonComponent
+                                                            className='buttons--margin'
+                                                            name='inactivatePet'
+                                                            label='Doado'
+                                                            color='primary'
+                                                            onClick={() => this.openModal('donatePet', pet.idPet)}></ButtonComponent>
+                                                    </div>
+                                                ) : (<></>)
+                                            }
+                                        </PetContainer>
+                                    </div>
+                                )
+                            }
                         })}
                     </div>
                 </UserPetsList>
                 <BotMenuComponent/>
                 <Modal show={showModal}>
-                    <Modal.Header closeButton>
+                    <Modal.Header>
                         <Modal.Title>Atenção</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>{this.recoverModal(currentModal as string)}</Modal.Body>
+                    <Modal.Body>{this.recoverModal(currentModal as string, modalParams)}</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => this.closeModal(username as string)}>
                             Fechar
@@ -286,6 +322,23 @@ export class UserProfilePageComponent extends Component {
                     label='Desativar Conta'
                     color='red'
                     onClick={() => this.deactiveAccount()}/>
+            </>
+        )
+    }
+
+    /**
+     * Retorna o modal de confirmação de doação do pet especificado
+     */
+     private donatePetModal(petId: number): JSX.Element {
+        console.log(petId);
+        return (
+            <>
+                <p>O Pet foi realmente Doado?</p>
+                <ButtonComponent
+                    name='confirmCadButton'
+                    label='Doar Pet'
+                    color='primary'
+                    onClick={() => this.donatePet(petId)}/>
             </>
         )
     }
