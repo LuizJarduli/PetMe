@@ -21,6 +21,32 @@ export class userApi {
     }
 
     /**
+     * Cadastra um pet no sistema
+     * @param idUser id do usuário que será associado ao pet
+     * @param params dados do pet
+     */
+    public static createPet(idUser: number, params: any): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            ApiService.getInstance().setMethod('POST').call(`http://localhost:8080/usuarios/${idUser}/pets`, params)
+                .then((response: any) => resolve(response))
+                .catch((error: any) => reject(error));
+        })
+    }
+
+    /**
+     * Efetua a doação de um pet (exclusão lógica)
+     * @param idUser id do usuário 
+     * @param idPet id do pet
+     */
+    public static donatePet(idUser: number, idPet: number): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            ApiService.getInstance().setMethod('DELETE').call(`http://localhost:8080/usuarios/${idUser}/pets/${idPet}`)
+                .then((response: any) => resolve(response))
+                .catch((error: any) => reject(error));
+        })
+    }
+
+    /**
      * Recupera o usuário pelo username
      *
      * @param params payload da requisição
