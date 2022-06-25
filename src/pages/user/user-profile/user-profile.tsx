@@ -4,7 +4,7 @@ import { TopMenuComponent } from '../../../components/menu/top/top-menu.componen
 import { BotMenuComponent } from '../../../components/menu/bot/bot-menu.component';
 import { LoadingComponent } from '../../../components/utility-components/loading.component';
 import { userApi } from '../../../core/api/cadastro/cadastro.api';
-import { IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
+import { IUserPetPropertiesModel, IUserPropertiesModel } from '../../../core/api/cadastro/cadastro.api.properties';
 import { StorageService } from '../../../core/services/storageService';
 import { PetContainer, UserPetsList, UserProfileData, UserProfileInfo, UserProfilePicture } from './style';
 import { Navigate } from 'react-router-dom';
@@ -16,6 +16,8 @@ import { EmailInputComponent } from '../../../components/form/inputs/email-input
 import { FileInputComponent } from '../../../components/form/inputs/file-cropped-input/file-input.component';
 import { PasswordInputComponent } from '../../../components/form/inputs/password-input/password-input.component';
 import { TextInputComponent } from '../../../components/form/inputs/text-input/text-input.component';
+import { DescInputComponent } from '../../../components/form/inputs/desc-input/desc-input.component';
+import { PhoneInputComponent } from '../../../components/form/inputs/phone-input/phone-input.component';
 
 /**
  * Tela de perfil do usuário
@@ -33,6 +35,8 @@ export class UserProfilePageComponent extends Component {
             showModal: false,
         }
     }
+
+    private isPet: number;
 
     state: { loading: boolean; redirect?: string; userData: IUserPropertiesModel | null; activeComponent: boolean, isUserLogged: boolean, showModal: boolean, currentModal?: string, modalParams?: any };
 
@@ -94,9 +98,9 @@ export class UserProfilePageComponent extends Component {
             case 'donatePet':
                 element = this.donatePetModal(data);
                 break;
-            // case 'editPet': 
-            //     element = this.editPetModal();
-            //     break;
+            case 'editPet': 
+                element = this.editPetModal(data);
+                break;
             default: break;
         }
 
@@ -109,43 +113,49 @@ export class UserProfilePageComponent extends Component {
      * @param formData dados do formulário
      */
      private handleCadastroFormSubmit(formData: any): void {
-        this.setState({ loading: true });
-        const { idUsuario } = this.state.userData || {};
-        const { userName, userEmail, userCity, userState, userPassword, userNewPassword, fotoPerfil} = formData || {};
-
-        /** Atualiza os dados do usuário */
-        userApi.editData(idUsuario as number, {
-            email: userEmail.value,
-            cidade: userCity.value,
-            estado: userState.value,
-        })
-            .then(() => {
-                toast.success('Dados Alterados realizado com sucesso!');
-                const promises = [];
-                /** Caso tenha atualizado sua senha*/
-                if (userPassword.value && userNewPassword.value) {
-                    promises.push(userApi.editPassword(idUsuario as number, {
-                        novaSenha: userNewPassword.value,
-                        senha: userPassword.value,
-                    }));
-                }
-        
-                /** Caso tenha alterado a foto de perfil */
-                if (fotoPerfil.value) {
-                    promises.push(userApi.editProfilePic(idUsuario as number, {
-                        fotoPerfil: fotoPerfil.value,
-                    }));
-                }
-                /** Executa todas as ações de edição */
-                this.setState({ loading: true });
-                promises.length > 0 && Promise.all(promises)
-                    .then(() => toast.success('Senha e/ou foto de perfil atualizados com sucesso!'))
-                    .catch((error) => toast.error(error))
-                    .finally(() => this.setState({ loading: false }));
-
+        console.log(formData, this.isPet);
+        if (this.isPet) {
+            this.editPet(formData, this.isPet);
+        } else {
+            this.setState({ loading: true });
+            const { idUsuario } = this.state.userData || {};
+            const { userName, userEmail, userCity, userState, userPassword, userNewPassword, fotoPerfil} = formData || {};
+    
+            /** Atualiza os dados do usuário */
+            userApi.editData(idUsuario as number, {
+                email: userEmail.value,
+                cidade: userCity.value,
+                estado: userState.value,
             })
-            .catch((error) => toast.error(error))
-            .finally(() => this.setState({ loading: false }));
+                .then(() => {
+                    toast.success('Dados Alterados realizado com sucesso!');
+                    const promises = [];
+                    /** Caso tenha atualizado sua senha*/
+                    if (userPassword.value && userNewPassword.value) {
+                        promises.push(userApi.editPassword(idUsuario as number, {
+                            novaSenha: userNewPassword.value,
+                            senha: userPassword.value,
+                        }));
+                    }
+            
+                    /** Caso tenha alterado a foto de perfil */
+                    if (fotoPerfil.value) {
+                        promises.push(userApi.editProfilePic(idUsuario as number, {
+                            fotoPerfil: fotoPerfil.value,
+                        }));
+                    }
+                    /** Executa todas as ações de edição */
+                    this.setState({ loading: true });
+                    promises.length > 0 && Promise.all(promises)
+                        .then(() => toast.success('Senha e/ou foto de perfil atualizados com sucesso!'))
+                        .catch((error) => toast.error(error))
+                        .finally(() => this.setState({ loading: false }));
+    
+                })
+                .catch((error) => toast.error(error))
+                .finally(() => this.setState({ loading: false }));
+        }  
+
     }
 
     /**
@@ -161,6 +171,26 @@ export class UserProfilePageComponent extends Component {
             .finally(() => {
                 this.setState({ loading: false });
             });
+    }
+
+    /**
+     * Edita os dados do pet
+     * @param params dados do formulário
+     * @param idPet id do pet a ser editado
+     */
+    private editPet(params: any, idPet: number): void {
+        this.setState({ loading: true });
+        const { idUsuario } = this.state.userData || {};
+        userApi.editPetData(idUsuario as number, idPet, {
+            numero: params.petTelefone.value,
+            estado: params.petEstado.value,
+            cidade: params.petCidade.value,
+            descricao: params.descricao.value,
+            fotoPet: params.fotoPet.value,
+        })
+            .then(() => toast.success('Seu Pet foi editado com sucesso!'))
+            .catch((error) => toast.error(error))
+            .finally(() => this.setState({ loading: false }));
     }
 
     /**
@@ -277,7 +307,7 @@ export class UserProfilePageComponent extends Component {
                                                             name='editPetProfile'
                                                             label='Editar Pet'
                                                             color='secondary'
-                                                            onClick={() => this.openModal('editPet', pet.idPet)}></ButtonComponent>
+                                                            onClick={() => this.openModal('editPet', pet)}></ButtonComponent>
                                                         <ButtonComponent
                                                             className='buttons--margin'
                                                             name='inactivatePet'
@@ -301,7 +331,10 @@ export class UserProfilePageComponent extends Component {
                     </Modal.Header>
                     <Modal.Body>{this.recoverModal(currentModal as string, modalParams)}</Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={() => this.closeModal(username as string)}>
+                        <Button variant="secondary" onClick={() => {
+                            this.isPet = 0;
+                            this.closeModal(username as string);
+                        }}>
                             Fechar
                         </Button>
                     </Modal.Footer>
@@ -375,14 +408,60 @@ export class UserProfilePageComponent extends Component {
                     name='userNewPassword'
                     placeholder='Nova Senha'/>
                 <FileInputComponent
-                        name='fotoPerfil'/>
+                    name='fotoPerfil'/>
                 <hr />
                 <br/>
                 <ButtonComponent 
-                        name='confirmCadButton'
-                        label='Editar'
-                        color='primary'/>
+                    name='confirmCadButton'
+                    label='Editar'
+                    color='primary'/>
             </FormComponent>
         )
+    }
+
+    /**
+     * Retorna o modal de edição de pet
+     * @param petId id do pet
+     * @returns 
+     */
+    private editPetModal(pet: IUserPetPropertiesModel): JSX.Element {
+        const { idPet, nome, numero, cidade, estado, descricao } = pet || {};
+        this.isPet = idPet;
+        return (
+            <FormComponent onFormSubmit={(event) => this.handleCadastroFormSubmit(event.detail)}>
+                <TextInputComponent 
+                    name='petName'
+                    placeholder='Nome do Maskote'
+                    validate='required'
+                    value={nome}
+                    readonly={true} />
+                <DescInputComponent 
+                    name='descricao'
+                    placeholder='Descrição'
+                    validate='required'
+                    value={descricao} />
+                <PhoneInputComponent 
+                    name='petTelefone'
+                    placeholder='Número (xx)xxxxx-xxxx'
+                    validate='required'
+                    value={numero} />
+                <TextInputComponent 
+                    name='petEstado'
+                    placeholder='Estado'
+                    validate='required'
+                    value={estado} />
+                <TextInputComponent 
+                    name='petCidade'
+                    placeholder='Cidade'
+                    validate='required'
+                    value={cidade} />
+                <FileInputComponent
+                    name='fotoPet'/>
+                <ButtonComponent 
+                    name='confirmCadButton'
+                    label='Editar Pet'
+                    color='primary'/>
+            </FormComponent>
+        );
     }
 }

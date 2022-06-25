@@ -1,5 +1,5 @@
 import { ApiService } from './../api';
-import { IUserPropertiesModel } from './cadastro.api.properties';
+import { IUserPropertiesModel, IUserPetPropertiesModel } from './cadastro.api.properties';
 
 /**
  * Classe que Realiza requisições referentes a autenticação/Login na API do sistema
@@ -7,7 +7,6 @@ import { IUserPropertiesModel } from './cadastro.api.properties';
  * @since 04/2022
  */
 export class userApi {
-
     /**
      * Efetua o Login na API do sistema
      * @param params payload da requisição
@@ -90,6 +89,21 @@ export class userApi {
     }
 
     /**
+     * Edita os dados do pet
+     *
+     * @param id id do usuario
+     * @param idPet id do pet
+     * @param params payload da requisição
+     */
+     public static editPetData(id: number, idPet: number, params: any = {}): Promise<IUserPetPropertiesModel> {
+        return new Promise<IUserPetPropertiesModel>((resolve, reject) => {
+            ApiService.getInstance().setMethod('PUT').call(`http://localhost:8080/usuarios/${id}/pets/${idPet}`, params)
+                .then((response: IUserPetPropertiesModel) => resolve(response))
+                .catch((error: any) => reject(error));
+        });
+    }
+
+    /**
      * Edita a senha do usuário
      *
      * @param id id do usuario
@@ -128,5 +142,18 @@ export class userApi {
                 .then((response: IUserPropertiesModel) => resolve(response))
                 .catch((error: any) => reject(error));
         });
+    }
+
+    /**
+     * Recuperação de senha do usuário, é feito um POST para atualizar esses dados.
+     *
+     * @param params dados necessário para requisição de recuperação de senha na API.
+     */
+    public static renewPassword(params: any = {}): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            ApiService.getInstance().setMethod('POST').call('http://localhost:8080/usuarios/recoveryPassword', params)
+                .then((response) => resolve(response))
+                .catch((error) => reject(error));
+        })
     }
 }
