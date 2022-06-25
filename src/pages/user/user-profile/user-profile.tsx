@@ -113,7 +113,7 @@ export class UserProfilePageComponent extends Component {
      * @param formData dados do formulário
      */
      private handleCadastroFormSubmit(formData: any): void {
-        console.log(formData, this.isPet);
+        
         if (this.isPet) {
             this.editPet(formData, this.isPet);
         } else {
