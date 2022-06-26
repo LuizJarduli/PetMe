@@ -18,7 +18,7 @@ import { Column, Container, ForgetPasswordLabel, ForgetPasswordOption } from './
  * @since 03/2022
  */
 export class LoginPageComponent extends Component {
-    constructor(props: typeof Component) {
+    constructor(props: Component) {
         super(props);
     }
 

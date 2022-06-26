@@ -24,7 +24,7 @@ import { FeedItemComponent } from '../../../components/containers/card/feed-Item
  * @since 06/2022
  */
 export class CadastroPetComponent extends Component {
-    constructor(props: typeof Component) {
+    constructor(props: Component) {
         super(props);
     }
 
