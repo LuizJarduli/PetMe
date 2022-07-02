@@ -7,6 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
+        publicPath: '/'
     },
     mode: 'development',
     module: {
@@ -36,6 +37,10 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.jsx'],
+        fallback: {
+            stream: require.resolve('stream-browserify'),
+            buffer: require.resolve('buffer'),
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -49,5 +54,6 @@ module.exports = {
         hot: 'only',
         compress: true,
         open: true,
+        historyApiFallback: true,
     },
 };
